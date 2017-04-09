@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*This script is used for all character and enemy physics behaviours.
+ * Don't edit this unless you want to change the way the custom physics
+ * system works. The public variables can be used to change the effect
+ * of gravity, or the movement speed. When you want to create a new 
+ * object that uses this system make a script which inherits the class
+ * PhysicsObject.
+*/
+
 public class PhysicsObject : MonoBehaviour {
 
 	public float minGroundNormalY = .65f;
