@@ -1,7 +1,7 @@
 # silver-spork
 CSUN Comp 380 group project game
 
-version 0.01
+version 0.01  
 Currently has functionality:
 
 -Player can move left, right and jump  
