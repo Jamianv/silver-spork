@@ -17,4 +17,9 @@ public class BulletScript : MonoBehaviour {
 	void OnBecameInvisible(){
 		Destroy(this.gameObject);
 	}
+	void OnCollisionEnter2D(Collision2D collision){
+		Debug.Log ("collided!");
+		Destroy (this.gameObject);
+
+	}
 }

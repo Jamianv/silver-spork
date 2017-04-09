@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 203794210}
   - component: {fileID: 203794209}
   - component: {fileID: 203794208}
+  - component: {fileID: 203794211}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -170,6 +171,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &203794211
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 203794207}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &504207368
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +390,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1088738664321310, guid: 1b45a12609a10c24cb44f89951dbfe75,
     type: 2}
   speed: 5
-  bulletDistance: 0.5
+  bulletDistance: 0.8
 --- !u!212 &2044007129
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -412,8 +433,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2044007127}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -1.42, z: 0}
-  m_LocalScale: {x: 0.97994804, y: 1, z: 1}
+  m_LocalPosition: {x: -3.07, y: -1.48, z: 0}
+  m_LocalScale: {x: 0.83426595, y: 0.8785987, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -449,6 +470,6 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
