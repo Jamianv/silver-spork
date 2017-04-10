@@ -196,7 +196,7 @@ MonoBehaviour:
     type: 2}
   speed: 10
   bulletDistance: 1
-  burst: 3
+  burst: 1
   burstTime: 0.5
 --- !u!114 &95262464
 MonoBehaviour:
