@@ -1,5 +1,10 @@
 # silver-spork
-CSUN Software Engineering 2017 group game
+CSUN Software Engineering 2017 Platformer Project  
+
+-Jamian Vieira  
+-Henry Quinteros  
+-Makram Merhom  
+-Oscar Ortiz  
 
 version 0.01  
 Currently has functionality:
