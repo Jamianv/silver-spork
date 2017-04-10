@@ -9,3 +9,5 @@ Currently has functionality:
 -Player experiences gravity  
 -Player experiences collision with solid objects  
 -Camera follows player  
+-There are simple enemies on the map that will move between walls.    
+if the player shoots them they will die, if they touch them the player will die.  
