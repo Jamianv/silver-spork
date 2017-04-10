@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - MainCam
+  - Terrain
+  - Enemy
+  - Floor
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -39,7 +43,7 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: sky
+  - name: Sky
     uniqueID: 3299262307
     locked: 0
   - name: Background
@@ -47,4 +51,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 910793131
     locked: 0

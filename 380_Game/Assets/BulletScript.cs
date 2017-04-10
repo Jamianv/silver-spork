@@ -18,6 +18,15 @@ public class BulletScript : MonoBehaviour {
 		Destroy(this.gameObject);
 	}
 	void OnCollisionEnter2D(Collision2D collision){
-		Destroy (this.gameObject);
+		if (collision.gameObject.tag == "Floor") {
+			Destroy (this.gameObject);
+		}
+		if (collision.gameObject.tag == "Wall") {
+			Destroy (this.gameObject);
+		}
+		if (collision.gameObject.tag == "Enemy") {
+			Destroy (collision.gameObject);
+			Destroy (this.gameObject);
+		}
 	}
 }
