@@ -1,5 +1,5 @@
 # silver-spork
-CSUN Comp 380 group project game
+CSUN Software Engineering 2017 group game
 
 version 0.01  
 Currently has functionality:
