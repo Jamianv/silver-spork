@@ -22,7 +22,7 @@ public class PlayerController : PhysicsObject {
 		}
 		else if(Input.GetButtonUp("Jump")){
 			if (velocity.y > 0)
-				velocity.y *= .5f;
+				velocity.y = velocity.y *  .5f;
 		}
 
 		targetVelocity = move * maxspeed;
