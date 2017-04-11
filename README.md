@@ -7,7 +7,6 @@ Henry Quinteros
 Makram Merhom  
 Oscar Ortiz  
 
-version 0.01  
 Currently has functionality:
 
 -Player can move left, right and jump  
