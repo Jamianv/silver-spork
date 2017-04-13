@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleEnemy : PhysicsObject {
-	public float maxspeed = 3.0f;
+	
+	[SerializeField]
+	private float maxspeed = 3.0f;
 
 	Vector2 move;
 	// Use this for initialization

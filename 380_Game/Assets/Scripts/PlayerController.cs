@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerController : PhysicsObject {
 
-	//!!!ALL PUBLIC FIELDS SHOULD BE CHANGED TO PRIVATE AND SERIALIZED FOR TESTING PURPOSES!!!///
-	public float maxspeed = 7;
-	public float jumpTakeOffSpeed = 7;
+	[SerializeField]
+	private float maxspeed = 7;
+	[SerializeField]
+	private float jumpTakeOffSpeed = 7;
 
 	// Use this for initialization
 	void Start () {

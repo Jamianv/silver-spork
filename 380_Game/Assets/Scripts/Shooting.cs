@@ -17,11 +17,16 @@ public class Shooting : MonoBehaviour {
 	//bulletDistance is how far away the bullet spawns from the player
 	//burst adjusts how many bullets fire per click
 	//burstTime adjusts how fast the burst of bullets is
-	public GameObject bulletPrefab;
-	public float speed = 5.0f;
-	public float bulletDistance = 0.5f;
-	public int burst = 1;
-	public float burstTime = 0.5f;
+	[SerializeField]
+	private GameObject bulletPrefab;
+	[SerializeField]
+	private float speed = 5.0f;
+	[SerializeField]
+	private float bulletDistance = 0.5f;
+    [SerializeField]
+	private int burst = 1;
+	[SerializeField]
+	private float burstTime = 0.5f;
 
 	private Vector2 direction;
 	private bool isFire = false;

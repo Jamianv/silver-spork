@@ -12,9 +12,10 @@ using UnityEngine;
 */
 
 public class PhysicsObject : MonoBehaviour {
-
-	public float minGroundNormalY = .65f;
-	public float gravityModifier = 1f;
+	[SerializeField]
+	private float minGroundNormalY = .65f;
+	[SerializeField]
+	private float gravityModifier = 1f;
 
 
 	protected Vector2 targetVelocity;
