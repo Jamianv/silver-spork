@@ -19,7 +19,7 @@ public class SimpleEnemy : PhysicsObject {
 	void OnCollisionEnter2D(Collision2D collision){
 		if (collision.gameObject.tag == "Wall")
 			move.x *= -1;
-		if (collision.gameObject.tag == "Player")
-			Destroy (collision.gameObject);
+		//if (collision.gameObject.tag == "Player")
+			//Destroy (collision.gameObject);
 	}
 }

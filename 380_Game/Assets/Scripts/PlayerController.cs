@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : PhysicsObject {
 
+	//!!!ALL PUBLIC FIELDS SHOULD BE CHANGED TO PRIVATE AND SERIALIZED FOR TESTING PURPOSES!!!///
 	public float maxspeed = 7;
 	public float jumpTakeOffSpeed = 7;
 

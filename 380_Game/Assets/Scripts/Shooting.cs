@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*script for shooting bullets from player towards mouse position
-* currently this just uses unity's physics engine, may be good to
-* switch over to custom 2D physics system. If you create a new shooting
-* script it can inherit this one and override the fire function to modify 
-* shooting behaviour
-*/
+///script for shooting bullets from player towards mouse position
+///currently this just uses unity's physics engine, may be good to
+///switch over to custom 2D physics system. If you create a new shooting
+///script it can inherit this one and override the fire function to modify 
+///shooting behaviour
+///
 
+//!!!ALL PUBLIC FIELDS SHOULD BE CHANGED TO PRIVATE AND SERIALIZED FOR TESTING PURPOSES!!!///
 public class Shooting : MonoBehaviour {
 
 	//bulletPrefab is the bullet object
