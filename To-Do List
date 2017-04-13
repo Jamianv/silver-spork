@@ -1,6 +1,8 @@
--Health Bar system/UI  
--Mana Bar system/UI  
 -Deadzone camera  
+-3 enemies: slimes, skeleton, golem 
+-Health and mana pickups  
+-Charge shot  
+-Incorporate health and mana into gameplay  
 -Create Enemy spawner  
 -Animations for character  
 -Animations for enemy  
@@ -10,4 +12,3 @@
 -Sounds  
 -Traps  
 -Pickups 3 weapons  
--3 enemies: slimes, skeleton, zombie
