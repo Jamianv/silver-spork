@@ -1,3 +1,6 @@
+-Health Bar system/UI  
+-Mana Bar system/UI  
+-Deadzone camera  
 -Create Enemy spawner  
 -Animations for character  
 -Animations for enemy  
@@ -5,10 +8,6 @@
 -Spell animations  
 -Explosion animations  
 -Sounds  
--Deadzone camera  
--Health Bar system/UI  
--Mana Bar system/UI  
--Different Enemy Types  
 -Traps  
 -Pickups 3 weapons  
--3 enemies: slimes
+-3 enemies: slimes, skeleton, zombie
