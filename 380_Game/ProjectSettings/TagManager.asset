@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Floor
   - Wall
+  - Bullet
+  - Health
   layers:
   - Default
   - TransparentFX

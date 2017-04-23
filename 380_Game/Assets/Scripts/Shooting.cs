@@ -27,19 +27,47 @@ public class Shooting : MonoBehaviour {
 	private int burst = 1;
 	[SerializeField]
 	private float burstTime = 0.5f;
+	[SerializeField]
+	private Stat mana;
+	[SerializeField]
+	private float manaRegenRate = 1.0f;
+
 
 	private Vector2 direction;
 	private bool isFire = false;
+	private bool isRegen = false;
 
-	// Use this for initialization
+
+	private void Awake(){
+		mana.Initialize ();
+	}
+
 	void Start () {
 		
 	}
 	void Update(){
 		if (Input.GetMouseButtonDown (0)) {
-			isFire = true;
+			if (mana.CurrentVal > 0) {
+				isFire = true;
+				mana.CurrentVal -= 10;
+			}
+		}
+		if (Input.GetMouseButton (0)) {
+			//Code for charge shot goes here
+		}
+		if (mana.CurrentVal != mana.MaxVal && !isRegen) {
+			StartCoroutine (RegainManaOverTime ());
 		}
 	}
+	private IEnumerator RegainManaOverTime(){
+		isRegen = true;
+		while (mana.CurrentVal < mana.MaxVal) {
+			mana.CurrentVal += 5;
+			yield return new WaitForSeconds (manaRegenRate);
+		}
+		isRegen = false;
+	}
+
 	// fixed Update is for physics manipulations
 	void FixedUpdate () {
 
