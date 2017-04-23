@@ -1,5 +1,4 @@
 -3 enemies: slimes, skeleton, golem 
--Mana Recharge 
 -Charge shot  
 -knockback from enemies   
 -Create Enemy spawner  
@@ -11,4 +10,5 @@
 -Sounds  
 -Traps  
 -Pickups 3 weapons   
--Controls UI
+-Controls UI  
+-Build a level
