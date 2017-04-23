@@ -1,7 +1,7 @@
 -3 enemies: slimes, skeleton, golem 
--Health and mana pickups  
+-Mana Recharge 
 -Charge shot  
--Incorporate health and mana into gameplay, knockback from enemies   
+-knockback from enemies   
 -Create Enemy spawner  
 -Animations for character  
 -Animations for enemy  
@@ -10,5 +10,5 @@
 -Explosion animations  
 -Sounds  
 -Traps  
--Pickups 3 weapons  
+-Pickups 3 weapons   
 -Controls UI
