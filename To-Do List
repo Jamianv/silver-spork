@@ -1,4 +1,6 @@
 -3 enemies: slimes, skeleton, golem 
+-Traps 
+-Pickups 3 weapons 
 -Charge shot  
 -knockback from enemies   
 -Create Enemy spawner  
@@ -8,7 +10,5 @@
 -Spell animations  
 -Explosion animations  
 -Sounds  
--Traps  
--Pickups 3 weapons   
 -Controls UI  
--Build a level
+-Build a level  
