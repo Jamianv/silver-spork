@@ -8,7 +8,8 @@ using UnityEngine;
  * system works. The public variables can be used to change the effect
  * of gravity, or the movement speed. When you want to create a new 
  * object that uses this system make a script which inherits the class
- * PhysicsObject.
+ * PhysicsObject. In that class create function "protected override void ComputeVelocity()"
+ * in that function you can manipulate objects velocity in an intuitive way
 */
 
 public class PhysicsObject : MonoBehaviour {
