@@ -8,8 +8,6 @@ using UnityEngine;
 ///script it can inherit this one and override the fire function to modify 
 ///shooting behaviour
 ///
-
-//!!!ALL PUBLIC FIELDS SHOULD BE CHANGED TO PRIVATE AND SERIALIZED FOR TESTING PURPOSES!!!///
 public class Shooting : MonoBehaviour {
 
 	//bulletPrefab is the bullet object
@@ -31,6 +29,8 @@ public class Shooting : MonoBehaviour {
 	private Stat mana;
 	[SerializeField]
 	private float manaRegenRate = 1.0f;
+	[SerializeField]
+	private int manaCost = 5;
 
 
 	private Vector2 direction;
@@ -49,7 +49,7 @@ public class Shooting : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 			if (mana.CurrentVal > 0) {
 				isFire = true;
-				mana.CurrentVal -= 10;
+				mana.CurrentVal -= manaCost;
 			}
 		}
 		if (Input.GetMouseButton (0)) {
@@ -95,6 +95,7 @@ public class Shooting : MonoBehaviour {
 	IEnumerator fireAsync(){
 		for (int i = 0; i < burst; i++) {
 			GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position + (Vector3)(direction * bulletDistance), Quaternion.identity);
+
 
 			//add velocity to bullet
 			bullet.GetComponent<Rigidbody2D> ().velocity = direction * speed;

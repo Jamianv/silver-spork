@@ -11,6 +11,7 @@ TagManager:
   - Wall
   - Bullet
   - Health
+  - deathfloor
   layers:
   - Default
   - TransparentFX

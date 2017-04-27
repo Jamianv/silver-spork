@@ -5,14 +5,15 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Player health mana. this is the script where all manipulations 
-/// of player health and mana will happen
+/// of player health will happen
 /// </summary>
 
 public class PlayerHealth : MonoBehaviour {
 
 	[SerializeField]
 	private Stat health;
-
+	[SerializeField]
+	private string scene;
 
 	private void Awake(){
 		health.Initialize ();
@@ -20,7 +21,10 @@ public class PlayerHealth : MonoBehaviour {
 
 	void Update(){
 		if (health.CurrentVal <= 0) {
-			SceneManager.LoadScene ("Level2");
+			death ();
+		}
+		if (gameObject.transform.position.y < -10) {
+			death ();
 		}
 	}
 
@@ -37,7 +41,11 @@ public class PlayerHealth : MonoBehaviour {
 			health.CurrentVal += 10;
 
 		}
+
 		
+	}
+	void death(){
+		SceneManager.LoadScene (scene);
 	}
 
 }
