@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyHealth : MonoBehaviour {
 
@@ -9,8 +10,15 @@ public class EnemyHealth : MonoBehaviour {
 
 	private Animator animator;
 
+	public int Health {
+		get {
+			return health;
+		}
+	}
+
 	private void Awake(){
 		animator = GetComponent<Animator> ();
+
 	}
 
 	private void Start(){
@@ -20,9 +28,13 @@ public class EnemyHealth : MonoBehaviour {
 	void Update () {
 		if (health <= 0) {
 			animator.SetInteger ("Health", health);
-		    //new WaitForSeconds (2);
-			//Destroy (this.gameObject);
+			StartCoroutine (Despawn ());
 		}
+	}
+
+	IEnumerator Despawn(){
+		yield return new WaitForSeconds (2);
+		Destroy (this.gameObject);
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){

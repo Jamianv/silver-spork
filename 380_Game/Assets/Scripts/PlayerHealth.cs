@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Player health mana. this is the script where all manipulations 
+/// Player health. this is the script where all manipulations 
 /// of player health will happen
 /// </summary>
 
@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour {
 	[SerializeField]
 	private Stat health;
 	[SerializeField]
-	private string scene;
+	private string deathScene;
 
 	private void Awake(){
 		health.Initialize ();
@@ -30,8 +30,8 @@ public class PlayerHealth : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){
 
-		if (collision.gameObject.tag == "Enemy")
-			health.CurrentVal -= 10;
+		//if (collision.gameObject.tag == "Enemy")
+			//health.CurrentVal -= 10;
 
 		if (collision.gameObject.tag == "Health") {
 
@@ -41,11 +41,13 @@ public class PlayerHealth : MonoBehaviour {
 			health.CurrentVal += 10;
 
 		}
+		if (collision.gameObject.tag == "EnemyBullet")
+			health.CurrentVal -= 10;
 
 		
 	}
 	void death(){
-		SceneManager.LoadScene (scene);
+		SceneManager.LoadScene (deathScene);
 	}
 
 }

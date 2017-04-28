@@ -45,6 +45,7 @@ public class Shooting : MonoBehaviour {
 	void Start () {
 		
 	}
+	//TODO: elliminate player and projectile collision
 	void Update(){
 		if (Input.GetMouseButtonDown (0)) {
 			if (mana.CurrentVal > 0) {
@@ -53,12 +54,13 @@ public class Shooting : MonoBehaviour {
 			}
 		}
 		if (Input.GetMouseButton (0)) {
-			//Code for charge shot goes here
+			
 		}
 		if (mana.CurrentVal != mana.MaxVal && !isRegen) {
 			StartCoroutine (RegainManaOverTime ());
 		}
 	}
+
 	private IEnumerator RegainManaOverTime(){
 		isRegen = true;
 		while (mana.CurrentVal < mana.MaxVal) {
@@ -71,12 +73,7 @@ public class Shooting : MonoBehaviour {
 	// fixed Update is for physics manipulations
 	void FixedUpdate () {
 
-		//where the mouse is pointing
-		Vector3 worldMousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-
-		//direction the bullet will go in
-		direction = (Vector2)(worldMousePos - transform.position);
-		direction.Normalize ();
+		GetMouseDirection ();
 
 		//Instantiate bullet locally
 		if(isFire){
@@ -102,6 +99,17 @@ public class Shooting : MonoBehaviour {
 
 			yield return new WaitForSeconds (burstTime); 
 		}
+	}
+
+	private void GetMouseDirection ()
+	{
+		//where the mouse is pointing
+		Vector3 worldMousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+
+		//direction from player to mouse
+		direction = (Vector2)(worldMousePos - transform.position);
+		direction.Normalize ();
+
 	}
 
 }

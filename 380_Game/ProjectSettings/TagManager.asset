@@ -12,6 +12,7 @@ TagManager:
   - Bullet
   - Health
   - deathfloor
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - 
   - 
   - Background
-  - 
+  - Obstacle
   - 
   - 
   - 
