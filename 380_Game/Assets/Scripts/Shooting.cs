@@ -37,13 +37,12 @@ public class Shooting : MonoBehaviour {
 	private bool isFire = false;
 	private bool isRegen = false;
 
-
 	private void Awake(){
 		mana.Initialize ();
 	}
 
 	void Start () {
-		
+	
 	}
 	//TODO: elliminate player and projectile collision
 	void Update(){
@@ -88,11 +87,9 @@ public class Shooting : MonoBehaviour {
 	void fire(){
 		StartCoroutine (fireAsync());
 	}
-
 	IEnumerator fireAsync(){
 		for (int i = 0; i < burst; i++) {
 			GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position + (Vector3)(direction * bulletDistance), Quaternion.identity);
-
 
 			//add velocity to bullet
 			bullet.GetComponent<Rigidbody2D> ().velocity = direction * speed;
