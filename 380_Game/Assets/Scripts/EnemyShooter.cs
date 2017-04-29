@@ -18,7 +18,7 @@ public class EnemyShooter : MonoBehaviour {
 
 	private Vector2 direction;
 
-	private GameObject[] player;
+	private GameObject player;
 
 	private EnemyHealth enemyhealth;
 
@@ -27,7 +27,7 @@ public class EnemyShooter : MonoBehaviour {
 	}
 
 	void Start(){
-		player = GameObject.FindGameObjectsWithTag ("Player");
+		player = GameObject.FindGameObjectWithTag ("Player");
 
 		if (enemyhealth.Health > 0) {
 			InvokeRepeating ("LaunchProjectile", 2f, shootSpeed);
@@ -35,7 +35,7 @@ public class EnemyShooter : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		direction = (Vector2)(player[0].transform.position - this.transform.position);
+		direction = (Vector2)(player.transform.position - this.transform.position);
 		direction.Normalize ();
 	}
 

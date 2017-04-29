@@ -14,7 +14,6 @@ public class PlayerController : PhysicsObject {
 
 	private Vector2 direction;
 
-	// Use this for initialization
 	void Awake(){
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 		animator = GetComponent<Animator> ();
