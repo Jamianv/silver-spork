@@ -1,16 +1,15 @@
--3 enemies: slimes, skeleton, golem 
--Parallax scrolling  
--Traps 
--Pickups 3 weapons 
+-Knight Attack  
+-Slime Split  
+-Traps  
 -Charge shot  
 -knockback from enemies   
 -Create Enemy spawner  
--Controls UI  
 -Build a level  
--Animations for character  
--Animations for enemy  
+-Backwards running character animation
 -Wand or weapon animations  
 -Spell animations  
 -Explosion animations  
 -Sounds  
+-Music  
 -Menu
+-Change bullet collisions to triggers
