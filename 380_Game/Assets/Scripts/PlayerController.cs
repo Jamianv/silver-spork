@@ -47,7 +47,7 @@ public class PlayerController : PhysicsObject {
 
 	private void OnCollisionEnter2D(Collision2D collision){
 		if (collision.gameObject.tag == "Enemy") {
-			velocity.y = 10;
+			//velocity.y = 10;
 			//TODO: Knockback from enemies
 			/*Vector2 hit = Vector2.zero;
 			hit.x = collision.rigidbody.velocity.x;

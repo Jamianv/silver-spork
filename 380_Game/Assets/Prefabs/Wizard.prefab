@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  deathLength: 1
 --- !u!114 &114875752156593716
 MonoBehaviour:
   m_ObjectHideFlags: 1

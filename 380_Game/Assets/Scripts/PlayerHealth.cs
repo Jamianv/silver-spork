@@ -30,8 +30,8 @@ public class PlayerHealth : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){
 
-		//if (collision.gameObject.tag == "Enemy")
-			//health.CurrentVal -= 10;
+		if (collision.gameObject.tag == "Enemy")
+			health.CurrentVal -= 10;
 
 		if (collision.gameObject.tag == "Health") {
 
@@ -43,6 +43,10 @@ public class PlayerHealth : MonoBehaviour {
 		}
 		if (collision.gameObject.tag == "EnemyBullet")
 			health.CurrentVal -= 10;
+
+		if (collision.gameObject.tag == "Sword") {
+			health.CurrentVal -= 10;
+		}
 
 		
 	}

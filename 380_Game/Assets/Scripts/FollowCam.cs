@@ -18,7 +18,7 @@ public class FollowCam : MonoBehaviour {
 
 	[SerializeField] float movementThreshold = 3;
 
-	void Update () {
+	void FixedUpdate () {
 
 		if (character.transform.position.x > transform.position.x) {
 			xDifference = character.transform.position.x - transform.position.x;

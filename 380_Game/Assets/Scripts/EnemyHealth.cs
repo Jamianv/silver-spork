@@ -7,6 +7,8 @@ public class EnemyHealth : MonoBehaviour {
 
 	[SerializeField]
 	private int health;
+	[SerializeField]
+	private float deathLength = 1;
 
 	private Animator animator;
 
@@ -33,7 +35,7 @@ public class EnemyHealth : MonoBehaviour {
 	}
 
 	IEnumerator Despawn(){
-		yield return new WaitForSeconds (2);
+		yield return new WaitForSeconds (deathLength);
 		Destroy (this.gameObject);
 	}
 

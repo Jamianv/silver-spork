@@ -28,10 +28,10 @@ public class EnemyShooter : MonoBehaviour {
 
 	void Start(){
 		player = GameObject.FindGameObjectWithTag ("Player");
-
 		if (enemyhealth.Health > 0) {
 			InvokeRepeating ("LaunchProjectile", 2f, shootSpeed);
 		}
+
 	}
 
 	void FixedUpdate(){

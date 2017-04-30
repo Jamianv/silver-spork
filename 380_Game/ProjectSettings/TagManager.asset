@@ -13,6 +13,7 @@ TagManager:
   - Health
   - deathfloor
   - EnemyBullet
+  - Sword
   layers:
   - Default
   - TransparentFX
@@ -24,11 +25,11 @@ TagManager:
   - 
   - Background
   - Obstacle
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Slimes
+  - Player
+  - Wizard
+  - Knight
+  - Pickups
   - 
   - 
   - 

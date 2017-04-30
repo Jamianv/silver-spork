@@ -8,10 +8,11 @@ public class EnemyTerritory : MonoBehaviour {
 	private GameObject player;
 	private bool playerInTerritory;
 
-	private BasicEnemy basicEnemy;
+	private KnightEnemy knightEnemy;
+	private 
 
 	void Awake(){
-		basicEnemy = GetComponent<BasicEnemy> ();
+		knightEnemy = GetComponent<KnightEnemy> ();
 	}
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
@@ -21,9 +22,9 @@ public class EnemyTerritory : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		if (playerInTerritory == true)
-			basicEnemy.MoveToPlayer ();
+			knightEnemy.MoveToPlayer ();
 		if (playerInTerritory == false)
-			basicEnemy.Rest ();
+			knightEnemy.Rest ();
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
