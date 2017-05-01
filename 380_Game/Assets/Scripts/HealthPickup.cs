@@ -13,10 +13,12 @@ public class HealthPickup : MonoBehaviour {
 
 	}
 	void Start(){
-		currentHealth = player.GetComponent<PlayerHealth> ().Health.CurrentVal;
 		maxHealth = player.GetComponent<PlayerHealth> ().Health.MaxVal;
 	}
-
+	void Update(){
+		currentHealth = player.GetComponent<PlayerHealth> ().Health.CurrentVal;
+		//Debug.Log ("CurrentHealth: " + currentHealth);
+	}
 	void OnCollisionEnter2D(Collision2D collision){
 		if (collision.gameObject.tag == "Player") {
 			if (currentHealth < maxHealth) {

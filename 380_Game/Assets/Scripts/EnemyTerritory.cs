@@ -10,7 +10,7 @@ public class EnemyTerritory : MonoBehaviour {
 
 	private KnightEnemy knightEnemy;
 
-	public BoxCollider2D moveTerritory;
+	private BoxCollider2D moveTerritory;
 
 	public bool PlayerInTerritory {
 		get {
@@ -38,19 +38,15 @@ public class EnemyTerritory : MonoBehaviour {
 			knightEnemy.Rest ();
 	}
 
-	void OnTriggerStay2D(Collider2D collider){
-		if (collider.gameObject == player) {
+	void OnTriggerStay2D(Collider2D other){
+		if (other.gameObject == player) {
 			playerInTerritory = true;
 			Debug.Log ("In the knight's area!");
-		}/*
-		if (collider == moveTerritory) {
-			//knightEnemy.MoveToPlayer ();
-			playerInTerritory = true;
-		}/**/
+		}
 	}
 
-	void OnTriggerExit2D(Collider2D collider){
-		if (collider.gameObject == player) {
+	void OnTriggerExit2D(Collider2D other){
+		if (other.gameObject == player) {
 			playerInTerritory = false;
 			Debug.Log ("Out of the knight's area!");
 		}

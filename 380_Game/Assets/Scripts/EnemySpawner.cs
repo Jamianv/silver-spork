@@ -7,17 +7,55 @@ public class EnemySpawner : MonoBehaviour {
 	private GameObject enemyPrefab;
 	private GameObject enemy;
 
-	// Use this for initialization
+	private GameObject player;
+	private bool playerInTerritory;
+
+	private BoxCollider2D spawnTerritory;
+
+	//Spawn when player is within area
+	void Awake(){
+		//spawnTerritory = GetComponent<BoxCollider2D> ();
+	}
+
 	void Start () {
-		InvokeRepeating ("Spawn", 2f, 10);
+		player = GameObject.FindGameObjectWithTag ("Player");
+		playerInTerritory = false;
+		//InvokeRepeating ("Spawn", 2f, 10);
+		StartCoroutine(Spawn());
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	void FixedUpdate(){
+
 	}
-	void Spawn(){
-		enemy = Instantiate (enemyPrefab, transform.position, Quaternion.identity);
-		enemy.AddComponent<Animator> ();
+	void OnTriggerStay2D(Collider2D other){
+		if (other.gameObject == player) {
+			playerInTerritory = true;
+			Debug.Log ("In Spawn Range!");
+		}
 	}
+
+	void OnTriggerExit2D(Collider2D other){
+		if (other.gameObject == player) {
+			playerInTerritory = false;
+			Debug.Log ("Out of Spawn Range!");
+		}
+	}
+
+	/*void Spawn(){
+		Instantiate (enemyPrefab, transform.position, Quaternion.identity);
+	}
+
+	/**/
+	IEnumerator Spawn(){
+		while (true) {
+			if (playerInTerritory == true) {
+				yield return new WaitForSeconds (5f);
+				Instantiate (enemyPrefab, transform.position, Quaternion.identity);
+
+			}
+			if (playerInTerritory == false) {
+				yield return null;
+			}
+		}
+	}/**/
 }

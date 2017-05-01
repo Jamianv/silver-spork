@@ -7,7 +7,6 @@ public class KnightAttack : MonoBehaviour {
 	private Vector2 direction;
 	private GameObject player;
 	public BoxCollider2D sword;
-	private bool attacking = false;
 	private float attackTimer = 1f;
 
 	void Awake(){
@@ -26,21 +25,23 @@ public class KnightAttack : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
+		//find where player is and adjust sword collider to face them
 		direction = (Vector2)(player.transform.position - this.transform.position);
 		sword.offset = new Vector2(direction.normalized.x*.125f, sword.offset.y);
 	}
 
 	void OnTriggerStay2D(Collider2D other){
+		//if player is in range activate sword collider, if player is in
+		//sword collider damage player at intervals
 		if (other.gameObject.tag == "Player") {
 			sword.enabled = true;
-			//player.SendMessage ("applyDamage", 10);
 			if (sword.IsTouching (other))
 				Attack ();
 		}
 
 
 	}
-
+	//apply damage at regular intervals
 	private void Attack(){
 		attackTimer -= Time.deltaTime;
 		if (attackTimer <= 0) {
@@ -48,9 +49,8 @@ public class KnightAttack : MonoBehaviour {
 			attackTimer = 1f;
 		}
 	}
-
+	//if player leaves reange disable sword collider
 	void OnTriggerExit2D(Collider2D other){
-		//attacking = false;
 		sword.enabled = false;
 	}
 
