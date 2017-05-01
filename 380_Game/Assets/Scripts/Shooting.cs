@@ -9,93 +9,117 @@ using UnityEngine;
 ///shooting behaviour
 ///
 public class Shooting : MonoBehaviour {
-
+	
 	//bulletPrefab is the bullet object
 	//speed controls bullet speed
 	//bulletDistance is how far away the bullet spawns from the player
 	//burst adjusts how many bullets fire per click
 	//burstTime adjusts how fast the burst of bullets is
+
+	//Physics variables
 	[SerializeField]
 	private GameObject bulletPrefab;
 	[SerializeField]
-	private float speed = 5.0f;
+	private float baseSpeed = 5f;
 	[SerializeField]
-	private float bulletDistance = 0.5f;
-    [SerializeField]
-	private int burst = 1;
-	[SerializeField]
-	private float burstTime = 0.5f;
-	[SerializeField]
-	private Stat mana;
+	private float minSpeed = 2f;
+	private float speed;
+	private Vector2 direction;
+
+	//Mana Variables
+	private PlayerMana playerMana;
 	[SerializeField]
 	private float manaRegenRate = 1.0f;
-	[SerializeField]
-	private int manaCost = 5;
-
-
-	private Vector2 direction;
-	private bool isFire = false;
 	private bool isRegen = false;
+	private float manaCost;
+	[SerializeField]
+	private float baseManaCost = 5f;
+	[SerializeField]
+	private int maxManaCost = 15;
+
+	//Charging variables
+	[SerializeField]
+	private float chargeRate = 10f;
+	private bool isFire = false;
+	private bool isCharging = false;
+	private float chargeDamage;
+	[SerializeField]
+	private float baseDamage = 5f;
+	[SerializeField]
+	private int maxDamage = 15;
 
 	private void Awake(){
-		mana.Initialize ();
+		playerMana = GetComponent<PlayerMana> ();
 	}
 
 	void Start () {
 	
 	}
 
+	/*White flash animation fully charged*/
+
 	void Update(){
 		if (Input.GetMouseButtonDown (0)) {
-			if (mana.CurrentVal > 0) {
-				isFire = true;
-				mana.CurrentVal -= manaCost;
+			if (playerMana.Mana.CurrentVal > 0) {
+				isCharging = true;
+				chargeDamage = baseDamage;
+				manaCost = baseManaCost;
+				speed = baseSpeed;
 			}
 		}
-		if (Input.GetMouseButton (0)) {
-			
+		if (isCharging == true) {
+			if (chargeDamage <= maxDamage) {
+				chargeDamage += (chargeRate * Time.deltaTime);
+			}
+			if (manaCost <= playerMana.Mana.CurrentVal) {
+				if(manaCost <= maxManaCost)
+					manaCost += (chargeRate * Time.deltaTime);
+			}
+			if(speed > minSpeed)
+				speed -= chargeRate * Time.deltaTime * 0.5f;
+
+			Debug.Log ("speed: " + speed);
 		}
-		if (mana.CurrentVal != mana.MaxVal && !isRegen) {
+		if (Input.GetMouseButtonUp (0)) {
+			isFire = true;
+			playerMana.gameObject.SendMessage ("decreaseMana", manaCost);
+			//mana.CurrentVal -= (int)manaCost;
+			manaCost = baseManaCost;
+		}
+
+
+		if (playerMana.Mana.CurrentVal != playerMana.Mana.MaxVal && !isRegen) {
 			StartCoroutine (RegainManaOverTime ());
 		}
 	}
 
-	private IEnumerator RegainManaOverTime(){
-		isRegen = true;
-		while (mana.CurrentVal < mana.MaxVal) {
-			mana.CurrentVal += 5;
-			yield return new WaitForSeconds (manaRegenRate);
-		}
-		isRegen = false;
-	}
-		
 	void FixedUpdate () {
 
 		GetMouseDirection ();
 
 		//Instantiate bullet locally
 		if(isFire){
-			fire ();
-			isFire = false;
-		}
-	}
+			GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position/* + (Vector3)(direction)*/, Quaternion.identity);
 
-
-	//fire uses this coroutine so that it can get access to WaitForSeconds
-	//which is used for burstfire
-	void fire(){
-		StartCoroutine (fireAsync());
-	}
-	IEnumerator fireAsync(){
-		for (int i = 0; i < burst; i++) {
-			GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position + (Vector3)(direction * bulletDistance), Quaternion.identity);
-
-			//add velocity to bullet'
-			//Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+			//add velocity to bullet
 			bullet.GetComponent<Rigidbody2D> ().velocity = direction * speed;
+			bullet.transform.localScale *= chargeDamage*.3f;
+			bullet.gameObject.SendMessage ("damageAmount", (int)chargeDamage);
+			chargeDamage = baseDamage;
+			isCharging = false;
+			isFire = false;
+			speed = baseSpeed;
 
-			yield return new WaitForSeconds (burstTime); 
 		}
+	}
+
+	private IEnumerator RegainManaOverTime(){
+		isRegen = true;
+		while (playerMana.Mana.CurrentVal < playerMana.Mana.MaxVal) {
+			playerMana.gameObject.SendMessage("increaseMana", 5);
+			yield return new WaitForSeconds (manaRegenRate);
+		}
+		isRegen = false;
 	}
 
 	private void GetMouseDirection ()
@@ -108,5 +132,6 @@ public class Shooting : MonoBehaviour {
 		direction.Normalize ();
 
 	}
+
 
 }

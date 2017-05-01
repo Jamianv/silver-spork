@@ -11,7 +11,6 @@ public class EnemyTerritory : MonoBehaviour {
 	private KnightEnemy knightEnemy;
 
 	public BoxCollider2D moveTerritory;
-	public BoxCollider2D attackTerritory;
 
 	public bool PlayerInTerritory {
 		get {
@@ -25,7 +24,6 @@ public class EnemyTerritory : MonoBehaviour {
 	void Awake(){
 		knightEnemy = GetComponent<KnightEnemy> ();
 		moveTerritory = GetComponent<BoxCollider2D> ();
-		attackTerritory = GetComponent<BoxCollider2D> ();
 	}
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");

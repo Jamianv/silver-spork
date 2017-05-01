@@ -37,4 +37,8 @@ public class BulletScript : MonoBehaviour {
 		if (collision.gameObject.tag == "EnemyBullet")
 			Destroy (this.gameObject);
 	}
+
+	private void damageAmount(int damage){
+		this.damage = damage;
+	}
 }

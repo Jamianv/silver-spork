@@ -17,6 +17,12 @@ public class PlayerHealth : MonoBehaviour {
 
 	private Animator animator;
 
+	public Stat Health {
+		get {
+			return health;
+		}
+	}
+
 	private void Awake(){
 		health.Initialize ();
 		animator = GetComponent<Animator> ();
@@ -34,25 +40,16 @@ public class PlayerHealth : MonoBehaviour {
 
 	void applyDamage(int damage){
 		health.CurrentVal -= damage;
-		StartCoroutine (Wait ());
+		StartCoroutine (HurtAnim ());
+	}
+	void applyHealth(int increase){
+		health.CurrentVal += increase;
 	}
 
-	IEnumerator Wait(){
+	IEnumerator HurtAnim(){
 		animator.SetBool ("hurt", true);
 		yield return new WaitForSeconds (1.5f);
 		animator.SetBool ("hurt", false);
-	}
-
-	void OnCollisionEnter2D(Collision2D collision){
-
-		if (collision.gameObject.tag == "Health") {
-
-			if(health.CurrentVal < health.MaxVal)
-				Destroy (collision.gameObject);
-
-			health.CurrentVal += 10;
-
-		}
 	}
 	void death(){
 		SceneManager.LoadScene (deathScene);

@@ -28,8 +28,9 @@ public class EnemyHealth : MonoBehaviour {
 	}
 		
 	void Update () {
+		animator.SetInteger ("Health", health);
 		if (health <= 0) {
-			animator.SetInteger ("Health", health);
+			
 			StartCoroutine (Despawn ());
 		}
 	}
