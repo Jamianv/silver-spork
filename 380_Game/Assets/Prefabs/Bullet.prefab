@@ -24,8 +24,8 @@ GameObject:
   - component: {fileID: 114889204459268530}
   - component: {fileID: 58976541327266544}
   - component: {fileID: 95671613007047378}
-  m_Layer: 0
-  m_Name: projectilePrefab
+  m_Layer: 15
+  m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d2cc3ccc4cd7a4aa2c9421621d258c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
 --- !u!212 &212516381559109622
 SpriteRenderer:
   m_ObjectHideFlags: 1

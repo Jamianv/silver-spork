@@ -7,7 +7,7 @@ using Pathfinding;
 public class EnemyAI : MonoBehaviour {
 
 	//What to chase?
-	[SerializeField]
+	private GameObject player;
 	private Transform target;
 
 	//How many times per second we update our path
@@ -44,6 +44,8 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	void Start(){
+		player = GameObject.FindGameObjectWithTag ("Player");
+		target = player.transform;
 		seeker = GetComponent<Seeker> ();
 		rb = GetComponent<Rigidbody2D> ();
 

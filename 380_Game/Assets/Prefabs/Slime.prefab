@@ -24,7 +24,8 @@ GameObject:
   - component: {fileID: 50092157532413898}
   - component: {fileID: 95638241995187036}
   - component: {fileID: 114154667427103720}
-  - component: {fileID: 114520119269121308}
+  - component: {fileID: 114486737499237316}
+  - component: {fileID: 114919944951087358}
   m_Layer: 10
   m_Name: Slime
   m_TagString: Enemy
@@ -108,9 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40e8c9df1ef9ce4fb00ba47bf5aaec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxspeed: 1.5
+  maxspeed: 1
   speed: 1
---- !u!114 &114520119269121308
+--- !u!114 &114486737499237316
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -122,7 +123,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 20
-  deathLength: 2
+  deathLength: 1
+--- !u!114 &114919944951087358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562219304539798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e6b0c6a672c074b86b45eff373786e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212160480953651104
 SpriteRenderer:
   m_ObjectHideFlags: 1

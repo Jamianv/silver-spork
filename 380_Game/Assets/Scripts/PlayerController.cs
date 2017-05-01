@@ -13,6 +13,7 @@ public class PlayerController : PhysicsObject {
 	private Animator animator;
 
 	private Vector2 direction;
+	private Vector2 move;
 
 	void Awake(){
 		spriteRenderer = GetComponent<SpriteRenderer> ();
@@ -20,7 +21,7 @@ public class PlayerController : PhysicsObject {
 	}
 	
 	protected override void ComputeVelocity(){
-		Vector2 move = Vector2.zero;
+		move = Vector2.zero;
 
 		move.x = Input.GetAxis ("Horizontal");
 
@@ -45,14 +46,9 @@ public class PlayerController : PhysicsObject {
 		targetVelocity = move * maxspeed;
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision){
-		if (collision.gameObject.tag == "Enemy") {
-			//velocity.y = 10;
-			//TODO: Knockback from enemies
-			/*Vector2 hit = Vector2.zero;
-			hit.x = collision.rigidbody.velocity.x;
-			targetVelocity = hit * 20;*/
-		}
+	private void KnockBack(float jump){
+		velocity.y = jump;
+		move.x = velocity.x*-100;
 	}
 
 	private void GetMouseDirection ()

@@ -2,30 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnightEnemy : PhysicsObject {
+[RequireComponent(typeof(Rigidbody2D))]
+public class KnightEnemy : MonoBehaviour {
 
+	//movement
 	[SerializeField]
 	private float maxSpeed = 5f;
 	[SerializeField]
-	private float attackRange = 1f;
-	private float dist;
-
+	private float speed = 3f;
 	private GameObject player;
 	private Vector2 move;
+	private Vector2 direction;
+	private Rigidbody2D rb2d;
 
+	//Animation
 	private SpriteRenderer spriteRenderer;
 	private Animator animator;
 
+	//health
 	private EnemyHealth enemyHealth;
 
-	private Vector2 direction;
+	private float dist;
 
-	[SerializeField]
-	private GameObject swordPrefab;
-	[SerializeField]
-	private float instantiationTimer = 0;
 
 	void Awake(){
+		rb2d = GetComponent<Rigidbody2D> ();
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 		animator = GetComponent<Animator> ();
 		enemyHealth = GetComponent<EnemyHealth> ();
@@ -33,54 +34,49 @@ public class KnightEnemy : PhysicsObject {
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
+
+		move = Vector2.zero;
 		Rest ();
 	}
 
-	public void MoveToPlayer(){
-		move = Vector2.zero;
-		move.x = (this.transform.position.x - player.transform.position.x);
-		move.Normalize ();
-		ComputeVelocity ();
-	}
-		
-	public void Rest(){
-		move.x = 0;
-		ComputeVelocity ();
-	}
 
-	protected override void ComputeVelocity(){
+	//MoveToPlayer gets called in FixedUpdate of Enemyterritory 
+	public void MoveToPlayer(){
+		
+		move.x = (player.transform.position.x - this.transform.position.x);
+		move.Normalize ();
 
 		SpriteFlip ();
 
 		//Running animation
-		animator.SetFloat ("velocityX", Mathf.Abs (velocity.x) / maxSpeed);
+		animator.SetFloat ("velocityX", Mathf.Abs (rb2d.velocity.x) / maxSpeed);
 
 		//distance from player
 		dist = Vector2.Distance (this.transform.position, player.transform.position);
-		Debug.Log (dist);
 
-		//if player is here then do all code for attacking
-		if (dist < attackRange) {
-			move.x = 0;
-			animator.SetFloat ("attackDist", dist);
-			CreatePrefab ();
-		}
 		animator.SetFloat ("attackDist", dist);
 
 		//stop moving if dead
 		if (enemyHealth.Health <= 0)
 			move.x = 0;
-		
-		//calculate movement velocity
-		targetVelocity = move * maxSpeed;
+
+		if (rb2d.velocity.magnitude < maxSpeed) {
+			rb2d.AddForce (move * speed);
+			Debug.Log ("Adding Speed!");
+		}
+		if (rb2d.velocity.magnitude > maxSpeed) {
+			Vector2 normal = new Vector2 (rb2d.velocity.normalized.x * maxSpeed, rb2d.velocity.y);
+			rb2d.velocity = normal;
+			Debug.Log ("Reducing Speed");
+		}
+
+
 	}
 
-	private void CreatePrefab(){
-		instantiationTimer -= Time.deltaTime;
-		if (instantiationTimer <= 0) {
-			Instantiate (swordPrefab, transform.position, Quaternion.identity);
-			instantiationTimer = 1f;
-		}
+	//Rest gets called in fixed update of EnemyTerritory
+	public void Rest(){
+		animator.SetFloat ("velocityX", Mathf.Abs (rb2d.velocity.x) / maxSpeed);
+		rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 	}
 
 	private void SpriteFlip(){

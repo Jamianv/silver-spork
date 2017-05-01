@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBulletScript : MonoBehaviour {
+	[SerializeField]
+	private int damage = 5;
 
 	void OnBecameInvisible(){
 		Destroy(this.gameObject);
@@ -16,6 +18,7 @@ public class EnemyBulletScript : MonoBehaviour {
 		}
 		if (collision.gameObject.tag == "Player") {
 			Destroy (this.gameObject);
+			collision.gameObject.SendMessage ("applyDamage", damage);
 		}
 		if (collision.gameObject.tag == "Bullet")
 			Destroy (this.gameObject);

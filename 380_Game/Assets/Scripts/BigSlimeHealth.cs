@@ -22,8 +22,7 @@ public class BigSlimeHealth : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D collision){
-		if (collision.gameObject.tag == "Bullet")
-			health -= 10;
+	private void applyDamage(int damage){
+		health -= damage;
 	}
 }

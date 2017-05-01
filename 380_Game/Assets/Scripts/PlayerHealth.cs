@@ -15,8 +15,11 @@ public class PlayerHealth : MonoBehaviour {
 	[SerializeField]
 	private string deathScene;
 
+	private Animator animator;
+
 	private void Awake(){
 		health.Initialize ();
+		animator = GetComponent<Animator> ();
 	}
 
 	void Update(){
@@ -26,12 +29,21 @@ public class PlayerHealth : MonoBehaviour {
 		if (gameObject.transform.position.y < -10) {
 			death ();
 		}
+
+	}
+
+	void applyDamage(int damage){
+		health.CurrentVal -= damage;
+		StartCoroutine (Wait ());
+	}
+
+	IEnumerator Wait(){
+		animator.SetBool ("hurt", true);
+		yield return new WaitForSeconds (1.5f);
+		animator.SetBool ("hurt", false);
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
-
-		if (collision.gameObject.tag == "Enemy")
-			health.CurrentVal -= 10;
 
 		if (collision.gameObject.tag == "Health") {
 
@@ -41,14 +53,6 @@ public class PlayerHealth : MonoBehaviour {
 			health.CurrentVal += 10;
 
 		}
-		if (collision.gameObject.tag == "EnemyBullet")
-			health.CurrentVal -= 10;
-
-		if (collision.gameObject.tag == "Sword") {
-			health.CurrentVal -= 10;
-		}
-
-		
 	}
 	void death(){
 		SceneManager.LoadScene (deathScene);

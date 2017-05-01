@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 95300608138814200}
   - component: {fileID: 114650391761206622}
   - component: {fileID: 114406198172387170}
+  - component: {fileID: 114819876400216946}
   m_Layer: 10
   m_Name: BigSlime
   m_TagString: Enemy
@@ -122,8 +123,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40e8c9df1ef9ce4fb00ba47bf5aaec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxspeed: 0.5
+  maxspeed: 1
   speed: 1
+--- !u!114 &114819876400216946
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1128225371682618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e6b0c6a672c074b86b45eff373786e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212928119021991740
 SpriteRenderer:
   m_ObjectHideFlags: 1

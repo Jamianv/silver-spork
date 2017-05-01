@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 95793015397588694}
   - component: {fileID: 114651372644646782}
   - component: {fileID: 114040557586742484}
+  - component: {fileID: 114553397812668986}
   m_Layer: 10
   m_Name: MediumSlime
   m_TagString: Enemy
@@ -111,6 +112,17 @@ MonoBehaviour:
   health: 50
   slimePrefab: {fileID: 1562219304539798, guid: 6389823fa92200749a94852a47ea339d,
     type: 2}
+--- !u!114 &114553397812668986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864552201117572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e6b0c6a672c074b86b45eff373786e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114651372644646782
 MonoBehaviour:
   m_ObjectHideFlags: 1

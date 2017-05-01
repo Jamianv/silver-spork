@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114190650990739224}
   - component: {fileID: 50377786326349774}
   - component: {fileID: 58280041753313532}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: EnemyBullet
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ba2e6e79dac8d4eb0030ce1ddcf958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
 --- !u!212 &212932576110931956
 SpriteRenderer:
   m_ObjectHideFlags: 1

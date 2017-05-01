@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour {
-	
+
+	[SerializeField]
+	private int damage = 10;
 	// Use this for initialization
 	void Start () {
 		
@@ -26,6 +28,11 @@ public class BulletScript : MonoBehaviour {
 		}
 		if (collision.gameObject.tag == "Enemy") {
 			Destroy (this.gameObject);
+			collision.gameObject.SendMessage ("applyDamage", damage);
+		}
+		if (collision.gameObject.tag == "Slime") {
+			Destroy (this.gameObject);
+			collision.gameObject.SendMessage ("applyDamage", damage);
 		}
 		if (collision.gameObject.tag == "EnemyBullet")
 			Destroy (this.gameObject);

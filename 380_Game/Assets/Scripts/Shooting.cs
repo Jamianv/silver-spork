@@ -44,7 +44,7 @@ public class Shooting : MonoBehaviour {
 	void Start () {
 	
 	}
-	//TODO: elliminate player and projectile collision
+
 	void Update(){
 		if (Input.GetMouseButtonDown (0)) {
 			if (mana.CurrentVal > 0) {
@@ -68,8 +68,7 @@ public class Shooting : MonoBehaviour {
 		}
 		isRegen = false;
 	}
-
-	// fixed Update is for physics manipulations
+		
 	void FixedUpdate () {
 
 		GetMouseDirection ();
@@ -91,7 +90,8 @@ public class Shooting : MonoBehaviour {
 		for (int i = 0; i < burst; i++) {
 			GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position + (Vector3)(direction * bulletDistance), Quaternion.identity);
 
-			//add velocity to bullet
+			//add velocity to bullet'
+			//Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 			bullet.GetComponent<Rigidbody2D> ().velocity = direction * speed;
 
 			yield return new WaitForSeconds (burstTime); 

@@ -9,10 +9,23 @@ public class EnemyTerritory : MonoBehaviour {
 	private bool playerInTerritory;
 
 	private KnightEnemy knightEnemy;
-	private 
+
+	public BoxCollider2D moveTerritory;
+	public BoxCollider2D attackTerritory;
+
+	public bool PlayerInTerritory {
+		get {
+			return playerInTerritory;
+		}
+		set {
+			playerInTerritory = value;
+		}
+	}
 
 	void Awake(){
 		knightEnemy = GetComponent<KnightEnemy> ();
+		moveTerritory = GetComponent<BoxCollider2D> ();
+		attackTerritory = GetComponent<BoxCollider2D> ();
 	}
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
@@ -27,17 +40,19 @@ public class EnemyTerritory : MonoBehaviour {
 			knightEnemy.Rest ();
 	}
 
-	void OnTriggerEnter2D(Collider2D collider){
+	void OnTriggerStay2D(Collider2D collider){
 		if (collider.gameObject == player) {
-			//basicEnemy.Move = new Vector2(1,0);
 			playerInTerritory = true;
 			Debug.Log ("In the knight's area!");
-		}
+		}/*
+		if (collider == moveTerritory) {
+			//knightEnemy.MoveToPlayer ();
+			playerInTerritory = true;
+		}/**/
 	}
 
 	void OnTriggerExit2D(Collider2D collider){
 		if (collider.gameObject == player) {
-			//basicEnemy.Move = new Vector2(0,0);
 			playerInTerritory = false;
 			Debug.Log ("Out of the knight's area!");
 		}

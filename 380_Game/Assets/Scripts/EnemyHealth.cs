@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour {
 			return health;
 		}
 	}
-
+		
 	private void Awake(){
 		animator = GetComponent<Animator> ();
 
@@ -26,7 +26,7 @@ public class EnemyHealth : MonoBehaviour {
 	private void Start(){
 		animator.SetInteger ("Health", health);
 	}
-
+		
 	void Update () {
 		if (health <= 0) {
 			animator.SetInteger ("Health", health);
@@ -34,13 +34,12 @@ public class EnemyHealth : MonoBehaviour {
 		}
 	}
 
+	private void applyDamage(int damage){
+		health -= damage;
+	}
+
 	IEnumerator Despawn(){
 		yield return new WaitForSeconds (deathLength);
 		Destroy (this.gameObject);
-	}
-
-	void OnCollisionEnter2D(Collision2D collision){
-		if (collision.gameObject.tag == "Bullet")
-			health -= 10;
 	}
 }
