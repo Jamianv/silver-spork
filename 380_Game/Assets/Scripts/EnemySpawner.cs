@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour {
 	[SerializeField]
 	private GameObject enemyPrefab;
-	private GameObject enemy;
 
 	private GameObject player;
 	private bool playerInTerritory;

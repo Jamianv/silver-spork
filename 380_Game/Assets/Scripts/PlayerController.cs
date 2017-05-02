@@ -15,9 +15,20 @@ public class PlayerController : PhysicsObject {
 	private Vector2 direction;
 	private Vector2 move;
 
+	//Sound
+	public AudioClip walkSound;
+	private AudioSource source;
+	private float volLowRange = .5f;
+	private float volHighRange = 1.0f;
+
 	void Awake(){
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 		animator = GetComponent<Animator> ();
+		source = GetComponent<AudioSource> ();
+	}
+
+	void Start(){
+		StartCoroutine (WalkSound ());
 	}
 	
 	protected override void ComputeVelocity(){
@@ -44,6 +55,17 @@ public class PlayerController : PhysicsObject {
 		animator.SetFloat ("velocityX", Mathf.Abs (velocity.x) / maxspeed);
 
 		targetVelocity = move * maxspeed;
+	}
+
+	IEnumerator WalkSound(){
+		while (true) {
+			if (move.x != 0 && grounded) {
+				float vol = Random.Range (volLowRange, volHighRange);
+				source.PlayOneShot (walkSound, vol);
+				yield return new WaitForSeconds (.2f);
+			} else
+				yield return null;
+		}
 	}
 
 	private void KnockBack(float jump){
