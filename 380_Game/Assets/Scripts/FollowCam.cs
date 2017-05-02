@@ -12,9 +12,11 @@ public class FollowCam : MonoBehaviour {
 	private Vector3 moveTemp;
 
 	[SerializeField] float speed = 3;
-	[SerializeField] float ycenter = 1;
+	[SerializeField] float ycenter = 20;
 	[SerializeField] float xDifference;
 	[SerializeField] float yDifference;
+	[SerializeField] Vector2 minimumBoundary;
+	[SerializeField] Vector2 maximumBoundary;
 
 	[SerializeField] float movementThreshold = 3;
 
@@ -34,11 +36,19 @@ public class FollowCam : MonoBehaviour {
 
 		if (xDifference >= movementThreshold || yDifference >= movementThreshold) {
 			moveTemp = character.transform.position;
-			//moveTemp.y += ycenter;
+			moveTemp.y += ycenter;
 			moveTemp.z = -1;
-			transform.position = Vector3.MoveTowards (transform.position, moveTemp, speed * Time.deltaTime);
+			transform.position = Vector3.MoveTowards (transform.position, moveTemp, speed * Time.fixedDeltaTime);
+
+		
 		}
-			
+		transform.position = new Vector3
+			(
+				Mathf.Clamp (transform.position.x, minimumBoundary.x, maximumBoundary.x),
+				Mathf.Clamp (transform.position.y, minimumBoundary.y, maximumBoundary.y),
+				transform.position.z
+			);
+
 			
 	}
 }

@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class PoisonMushroomScript : MonoBehaviour {
 
+	private GameObject player;
+
+	void Awake(){
+		player = GameObject.FindGameObjectWithTag ("Player");
+	}
+
 	void OnTriggerStay2D(Collider2D other){
-		if (other.gameObject.tag == "Player")
-			other.gameObject.SendMessage ("applyDamage", 5);
+		if (other.gameObject == player) {
+			StartCoroutine (Hurt ());
+		}
+	}
+	IEnumerator Hurt(){
+		player.gameObject.SendMessage ("applyDamage", 5);
+		player.gameObject.SendMessage ("KnockBack",10);
+		yield return new WaitForSeconds (1f);
 	}
 }
