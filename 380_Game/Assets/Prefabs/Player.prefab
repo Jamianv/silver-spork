@@ -26,6 +26,8 @@ GameObject:
   - component: {fileID: 114534812319666408}
   - component: {fileID: 70357707932117304}
   - component: {fileID: 95994641319298404}
+  - component: {fileID: 82755332546923010}
+  - component: {fileID: 114104881415592896}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -40,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1638325416401028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.48, y: 3.04, z: 0}
+  m_LocalPosition: {x: -5.67, y: 2.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,6 +83,87 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0014089524, y: -0.039812643}
   m_Size: {x: 0.30127206, y: 0.5595558}
   m_Direction: 0
+--- !u!82 &82755332546923010
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1638325416401028}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243103325499063950, guid: 84b4c72e649fe854fb313654454f95ef,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95994641319298404
 Animator:
   serializedVersion: 3
@@ -98,6 +181,21 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114104881415592896
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1638325416401028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d621036ce01dbd441aaa4897387a497f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mana:
+    bar: {fileID: 0}
+    maxVal: 230
+    currentVal: 230
 --- !u!114 &114469406097926662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -111,16 +209,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1088738664321310, guid: 1b45a12609a10c24cb44f89951dbfe75,
     type: 2}
-  speed: 5
-  bulletDistance: 0
-  burst: 1
-  burstTime: 0.5
-  mana:
-    bar: {fileID: 0}
-    maxVal: 230
-    currentVal: 230
-  manaRegenRate: 1
-  manaCost: 5
+  baseSpeed: 5
+  minSpeed: 2
+  manaRegenRate: 0.5
+  baseManaCost: 5
+  maxManaCost: 15
+  chargeRate: 10
+  baseDamage: 5
+  maxDamage: 15
+  distFromPlayer: 0.5
+  shootSound: {fileID: 8300000, guid: 522f3fb89590ca54dbc48dac22d6356f, type: 3}
 --- !u!114 &114534812319666408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,9 +247,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.65
-  gravityModifier: 3
-  maxspeed: 7
-  jumpTakeOffSpeed: 14
+  gravityModifier: 2
+  maxspeed: 5
+  jumpTakeOffSpeed: 7
+  walkSound: {fileID: 8300000, guid: b86cdf52c7034c844b7ff90f7e6c4ba0, type: 3}
+  jumpSound: {fileID: 0}
+  landSound: {fileID: 0}
+  repeatRate: 0.2
 --- !u!212 &212026169071554940
 SpriteRenderer:
   m_ObjectHideFlags: 1

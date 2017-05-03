@@ -24,12 +24,22 @@ public class KnightEnemy : MonoBehaviour {
 
 	private float dist;
 
+	//Sound
+	public AudioClip walkSound;
+	private AudioSource source;
+	[SerializeField]
+	private float volLowRange = .01f;
+	[SerializeField]
+	private float volHighRange = .1f;
+	[SerializeField]
+	private float repeatRate = 1f;
 
 	void Awake(){
 		rb2d = GetComponent<Rigidbody2D> ();
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 		animator = GetComponent<Animator> ();
 		enemyHealth = GetComponent<EnemyHealth> ();
+		source = GetComponent<AudioSource> ();
 	}
 
 	void Start () {
@@ -37,6 +47,7 @@ public class KnightEnemy : MonoBehaviour {
 
 		move = Vector2.zero;
 		Rest ();
+		StartCoroutine (WalkSound ());
 	}
 
 
@@ -88,5 +99,15 @@ public class KnightEnemy : MonoBehaviour {
 			spriteRenderer.flipX = !spriteRenderer.flipX;
 		}
 	}
-
+	IEnumerator WalkSound(){
+		while (true) {
+			if (rb2d.velocity.x > 0.01 || rb2d.velocity.x < -0.01) {
+				float vol = Random.Range (volLowRange, volHighRange);
+				source.pitch = 0.37f;
+				source.PlayOneShot (walkSound, vol);
+				yield return new WaitForSeconds (repeatRate);
+			} else
+				yield return null;
+		}
+	}
 }

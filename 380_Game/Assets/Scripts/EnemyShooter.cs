@@ -22,7 +22,16 @@ public class EnemyShooter : MonoBehaviour {
 
 	private EnemyHealth enemyhealth;
 
+	//Sound
+	public AudioClip shootSound;
+	private AudioSource source;
+	[SerializeField]
+	private float volLowRange = 0.5f;
+	[SerializeField]
+	private float volHighRange = 1f;
+
 	void Awake(){
+		source = GetComponent<AudioSource> ();
 		enemyhealth = GetComponent<EnemyHealth> ();
 	}
 
@@ -40,6 +49,10 @@ public class EnemyShooter : MonoBehaviour {
 	}
 
 	void LaunchProjectile(){
+
+		float vol = Random.Range (volLowRange, volHighRange);
+		source.PlayOneShot (shootSound, vol);
+
 		GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position + (Vector3)(direction * bulletDistance), Quaternion.identity);
 		//add velocity to bullet
 		bullet.GetComponent<Rigidbody2D> ().velocity = direction * speed;

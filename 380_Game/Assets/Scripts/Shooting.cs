@@ -47,6 +47,8 @@ public class Shooting : MonoBehaviour {
 	private float baseDamage = 5f;
 	[SerializeField]
 	private int maxDamage = 15;
+	[SerializeField]
+	private float distFromPlayer;
 
 	//Sound
 	public AudioClip shootSound;
@@ -108,14 +110,18 @@ public class Shooting : MonoBehaviour {
 		if(isFire){
 
 			float vol = Random.Range (volLowRange, volHighRange);
-			source.PlayOneShot (shootSound);
+			source.PlayOneShot (shootSound, vol);
 
-			GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position/* + (Vector3)(direction)*/, Quaternion.identity);
-			Physics2D.IgnoreCollision (bullet.GetComponent<CircleCollider2D>(), this.gameObject.GetComponent<CapsuleCollider2D>());
+			GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position + (Vector3)(direction*distFromPlayer), Quaternion.identity);
+
 			//add velocity to bullet
 			bullet.GetComponent<Rigidbody2D> ().velocity = direction * speed;
+			Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), this.gameObject.GetComponent<Collider2D>());
+			//change size depending on charge
 			bullet.transform.localScale *= chargeDamage*.3f;
+			//sed damage to enemy
 			bullet.gameObject.SendMessage ("damageAmount", (int)chargeDamage);
+			//reset charge to zero
 			chargeDamage = baseDamage;
 			isCharging = false;
 			isFire = false;

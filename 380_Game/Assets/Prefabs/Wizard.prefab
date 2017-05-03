@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 95152956822045222}
   - component: {fileID: 114846604615737868}
   - component: {fileID: 114875752156593716}
+  - component: {fileID: 82453766459800950}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Enemy
@@ -82,6 +83,87 @@ CapsuleCollider2D:
   m_Offset: {x: -0.031636, y: 0.003954649}
   m_Size: {x: 0.27800608, y: 0.50736666}
   m_Direction: 0
+--- !u!82 &82453766459800950
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1533582605645262}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243103325499063950, guid: 84b4c72e649fe854fb313654454f95ef,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95152956822045222
 Animator:
   serializedVersion: 3
@@ -110,7 +192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e7b8dd2bc0d1e547b07f20d1704b5ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 4737319104884178, guid: d8edfa5c161ea8040af55f070c1c2af3, type: 2}
   updateRate: 2
   speed: 1000
   fMode: 0
@@ -157,6 +238,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   deathLength: 1
+  deathSound: {fileID: 0}
+  volLowRange: 0.01
+  volHighRange: 0.1
 --- !u!114 &114875752156593716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -173,6 +257,9 @@ MonoBehaviour:
   bulletDistance: 0.5
   speed: 5
   shootSpeed: 1
+  shootSound: {fileID: 8300000, guid: b0d260830478d2649baf14a0648030ba, type: 3}
+  volLowRange: 0.5
+  volHighRange: 1
 --- !u!212 &212736038839510390
 SpriteRenderer:
   m_ObjectHideFlags: 1

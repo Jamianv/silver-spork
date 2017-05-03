@@ -7,15 +7,29 @@ public class KnightAttack : MonoBehaviour {
 	private Vector2 direction;
 	private GameObject player;
 	public BoxCollider2D sword;
-	private float attackTimer = 1f;
+	private float attackTimer;
+	[SerializeField]
+	private float attackRate = 0.5f;
+
+	//Sound
+	public AudioClip swordSound;
+	private AudioSource source;
+	[SerializeField]
+	private float volLowRange = .01f;
+	[SerializeField]
+	private float volHighRange = .1f;
+
 
 	void Awake(){
 		//sword = GetComponent<BoxCollider2D> ();
+
 		sword.enabled = false;
+		source = GetComponent<AudioSource> ();
 	}
 
 	// Use this for initialization
 	void Start () {
+		attackTimer = attackRate;
 		player = GameObject.FindGameObjectWithTag ("Player");
 	}
 	
@@ -45,8 +59,10 @@ public class KnightAttack : MonoBehaviour {
 	private void Attack(){
 		attackTimer -= Time.deltaTime;
 		if (attackTimer <= 0) {
+			source.pitch = 1;
+			source.PlayOneShot (swordSound);
 			player.SendMessage ("applyDamage", 5);
-			attackTimer = 1f;
+			attackTimer = attackRate;
 		}
 	}
 	//if player leaves reange disable sword collider

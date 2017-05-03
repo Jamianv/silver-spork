@@ -6,20 +6,20 @@ public class BulletScript : MonoBehaviour {
 
 	[SerializeField]
 	private int damage = 10;
+	private GameObject player;
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		   
+		player = GameObject.FindGameObjectWithTag ("Player");
+
 	}
 
 	void OnBecameInvisible(){
 		Destroy(this.gameObject);
 	}
 	void OnCollisionEnter2D(Collision2D collision){
+		if (collision.gameObject == player) {
+			Physics2D.IgnoreCollision (player.GetComponent<Collider2D>(), GetComponent<Collider2D> ());
+		}
 		if (collision.gameObject.tag == "Floor") {
 			Destroy (this.gameObject);
 		}

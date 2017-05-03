@@ -17,9 +17,13 @@ public class PlayerController : PhysicsObject {
 
 	//Sound
 	public AudioClip walkSound;
+	public AudioClip jumpSound;
+	public AudioClip landSound;
 	private AudioSource source;
-	private float volLowRange = .5f;
-	private float volHighRange = 1.0f;
+	private float volLowRange = .01f;
+	private float volHighRange = .1f;
+	[SerializeField]
+	private float repeatRate = .2f;
 
 	void Awake(){
 		spriteRenderer = GetComponent<SpriteRenderer> ();
@@ -37,6 +41,7 @@ public class PlayerController : PhysicsObject {
 		move.x = Input.GetAxis ("Horizontal");
 
 		if (Input.GetButtonDown ("Jump") && grounded) {
+			source.PlayOneShot (jumpSound);
 			velocity.y = jumpTakeOffSpeed;
 		}
 		else if(Input.GetButtonUp("Jump")){
@@ -63,14 +68,17 @@ public class PlayerController : PhysicsObject {
 				float vol = Random.Range (volLowRange, volHighRange);
 				source.PlayOneShot (walkSound, vol);
 				yield return new WaitForSeconds (.2f);
-			} else
+			}else
 				yield return null;
 		}
 	}
 
 	private void KnockBack(float jump){
 		velocity.y = jump;
-		move.x = velocity.x*-100;
+		for (int i = 0; i < 5; i++) {
+			move.x = velocity.x*-100;	
+		}
+
 	}
 
 	private void GetMouseDirection ()
@@ -82,6 +90,13 @@ public class PlayerController : PhysicsObject {
 		direction = (Vector2)(worldMousePos - transform.position);
 		direction.Normalize ();
 
+	}
+
+	void OnCollisionEnter2D(Collision2D other){
+		if (other.gameObject.tag == "Floor") {
+			float vol = Random.Range (volLowRange, volHighRange);
+			source.PlayOneShot (landSound, 5);
+		}
 	}
 
 }

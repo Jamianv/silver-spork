@@ -23,10 +23,21 @@ public class SlimeEnemy : MonoBehaviour {
 
 	private EnemyHealth enemyHealth;
 
+	//Sound
+	public AudioClip walkSound;
+	private AudioSource source;
+	[SerializeField]
+	private float volLowRange = .01f;
+	[SerializeField]
+	private float volHighRange = .1f;
+	[SerializeField]
+	private float repeatRate = 1f;
+
 	void Awake(){
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 		animator = GetComponent<Animator> ();
 		enemyHealth = GetComponent<EnemyHealth> ();
+		source = GetComponent<AudioSource> ();
 	}
 
 	void Start () {
@@ -34,7 +45,9 @@ public class SlimeEnemy : MonoBehaviour {
 		changeTimer = Random.Range (4, 10);
 		jumpTimer = Random.Range (1, 10);
 		dir = new Vector2 (Random.Range (-10, 10), 0);
+		StartCoroutine (SlimeWalkSound ());
 	}
+
 
 	//Note put this stuff in rest and the follow stuff from knight enemy in the move to player function//
 	void FixedUpdate(){
@@ -69,6 +82,7 @@ public class SlimeEnemy : MonoBehaviour {
 
 		//animate sprite
 		animator.SetFloat ("velocityX", Mathf.Abs (rb2d.velocity.x) / maxspeed);
+
 	}
 
 	//jump at random time
@@ -86,6 +100,17 @@ public class SlimeEnemy : MonoBehaviour {
 		if (changeTimer <= 0) {
 			dir = new Vector2 (Random.Range (-10, 10), 0);
 			changeTimer = Random.Range(4,10);
+		}
+	}
+
+	IEnumerator SlimeWalkSound(){
+		while (true) {
+			if (rb2d.velocity.x > 0.01 || rb2d.velocity.x < -0.01) {
+				float vol = Random.Range (volLowRange, volHighRange);
+				source.PlayOneShot (walkSound, vol);
+				yield return new WaitForSeconds (repeatRate);
+			} else
+				yield return null;
 		}
 	}
 }
