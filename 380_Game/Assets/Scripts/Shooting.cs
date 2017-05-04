@@ -25,6 +25,7 @@ public class Shooting : MonoBehaviour {
 	private float minSpeed = 2f;
 	private float speed;
 	private Vector2 direction;
+	private Vector3 worldMousePos;
 
 	//Mana Variables
 	private PlayerMana playerMana;
@@ -116,7 +117,7 @@ public class Shooting : MonoBehaviour {
 			source.PlayOneShot (shootSound, vol);
 
 			GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position + (Vector3)(direction*distFromPlayer), Quaternion.identity);
-
+			bullet.transform.LookAt (worldMousePos);
 			//add velocity to bullet
 			bullet.GetComponent<Rigidbody2D> ().velocity = direction * speed;
 			Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), this.gameObject.GetComponent<Collider2D>());
@@ -145,7 +146,7 @@ public class Shooting : MonoBehaviour {
 	private void GetMouseDirection ()
 	{
 		//where the mouse is pointing
-		Vector3 worldMousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		worldMousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 
 		//direction from player to mouse
 		direction = (Vector2)(worldMousePos - transform.position);
