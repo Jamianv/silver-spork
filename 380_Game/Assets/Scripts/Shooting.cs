@@ -116,9 +116,12 @@ public class Shooting : MonoBehaviour {
 			float vol = Random.Range (volLowRange, volHighRange);
 			source.PlayOneShot (shootSound, vol);
 
-			GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position + (Vector3)(direction*distFromPlayer), Quaternion.identity);
-			bullet.transform.LookAt (worldMousePos);
+			//worldMousePos.z = transform.position.z - Camera.main.transform.position.z;
+			Quaternion rotation = Quaternion.FromToRotation(Vector3.up, worldMousePos-transform.position);
+
+			GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position + (Vector3)(direction*distFromPlayer), rotation);
 			//add velocity to bullet
+
 			bullet.GetComponent<Rigidbody2D> ().velocity = direction * speed;
 			Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), this.gameObject.GetComponent<Collider2D>());
 			//change size depending on charge

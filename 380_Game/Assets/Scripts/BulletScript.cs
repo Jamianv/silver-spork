@@ -18,9 +18,12 @@ public class BulletScript : MonoBehaviour {
 	[SerializeField]
 	private float volHighRange = .1f;
 
+	private Animator animator;
+
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		source = GetComponent<AudioSource> ();
+		animator = GetComponent<Animator> ();
 	}
 
 	void OnBecameInvisible(){
@@ -39,6 +42,7 @@ public class BulletScript : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 		if (collision.gameObject.tag == "Enemy") {
+			animator.SetBool ("explode", true);
 			Destroy (this.gameObject);
 			collision.gameObject.SendMessage ("applyDamage", damage);
 		}
