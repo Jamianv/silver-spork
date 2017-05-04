@@ -7,40 +7,33 @@ using UnityEngine;
 
 public class FollowCam : MonoBehaviour {
 
-	[SerializeField] Transform character;
+	private GameObject player;
 
 	private Vector3 moveTemp;
+	private Vector2 direction;
 
 	[SerializeField] float speed = 3;
-	[SerializeField] float ycenter = 20;
-	[SerializeField] float xDifference;
-	[SerializeField] float yDifference;
 	[SerializeField] Vector2 minimumBoundary;
 	[SerializeField] Vector2 maximumBoundary;
 
 	[SerializeField] float movementThreshold = 3;
 
+	void Awake(){
+		player = GameObject.FindGameObjectWithTag ("Player");
+	}
+
 	void FixedUpdate () {
 
-		if (character.transform.position.x > transform.position.x) {
-			xDifference = character.transform.position.x - transform.position.x;
+		if (player.transform.position.x > transform.position.x) {
+			direction = (Vector2)(player.transform.position - this.transform.position);
 		} else {
-			xDifference = transform.position.x - character.transform.position.x;
+			direction = (Vector2)(this.transform.position - player.transform.position);
 		}
-
-		if (character.transform.position.y > transform.position.y) {
-			yDifference = character.transform.position.y - transform.position.y;
-		} else {
-			yDifference = transform.position.y - character.transform.position.y;
-		}
-
-		if (xDifference >= movementThreshold || yDifference >= movementThreshold) {
-			moveTemp = character.transform.position;
-			moveTemp.y += ycenter;
+	
+		if (direction.x >= movementThreshold || direction.y >= movementThreshold) {
+			moveTemp = player.transform.position;
 			moveTemp.z = -1;
 			transform.position = Vector3.MoveTowards (transform.position, moveTemp, speed * Time.fixedDeltaTime);
-
-		
 		}
 		transform.position = new Vector3
 			(
