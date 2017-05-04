@@ -17,6 +17,14 @@ public class PlayerHealth : MonoBehaviour {
 
 	private Animator animator;
 
+	//Sound
+	public AudioClip hurtSound;
+	private AudioSource source;
+	[SerializeField]
+	private float volLowRange = .01f;
+	[SerializeField]
+	private float volHighRange = .1f;
+
 	public Stat Health {
 		get {
 			return health;
@@ -26,6 +34,7 @@ public class PlayerHealth : MonoBehaviour {
 	private void Awake(){
 		health.Initialize ();
 		animator = GetComponent<Animator> ();
+		source = GetComponent<AudioSource> ();
 	}
 
 	void Update(){
@@ -39,7 +48,9 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	void applyDamage(int damage){
+		source.PlayOneShot (hurtSound);
 		health.CurrentVal -= damage;
+		//TODO: hurt animation is buggy
 		StartCoroutine (HurtAnim ());
 	}
 	void applyHealth(int increase){

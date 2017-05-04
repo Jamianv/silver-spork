@@ -238,7 +238,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   deathLength: 1
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: a794f5d8b354ed14a84c7d65ebd571df, type: 3}
+  hurtSound: {fileID: 8300000, guid: d6814648153336543b5c297dbbff3791, type: 3}
+  mixer: {fileID: 243103325499063950, guid: 84b4c72e649fe854fb313654454f95ef, type: 2}
   volLowRange: 0.01
   volHighRange: 0.1
 --- !u!114 &114875752156593716

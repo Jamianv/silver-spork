@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using UnityEngine.Audio;
+
 
 public class EnemyHealth : MonoBehaviour {
 
@@ -15,7 +16,9 @@ public class EnemyHealth : MonoBehaviour {
 
 	//Sound
 	public AudioClip deathSound;
+	public AudioClip hurtSound;
 	private AudioSource source;
+	public AudioMixerGroup mixer;
 	[SerializeField]
 	private float volLowRange = .01f;
 	[SerializeField]
@@ -26,7 +29,7 @@ public class EnemyHealth : MonoBehaviour {
 			return health;
 		}
 	}
-		
+
 	private void Awake(){
 		animator = GetComponent<Animator> ();
 		source = GetComponent<AudioSource> ();
@@ -34,19 +37,23 @@ public class EnemyHealth : MonoBehaviour {
 
 	private void Start(){
 		animator.SetInteger ("Health", health);
-
-		StartCoroutine (DeathSound ());
 	}
 		
 	void Update () {
 		animator.SetInteger ("Health", health);
 		if (health <= 0) {
-			dead = true;
+			if (!dead) {
+				float vol = Random.Range (volLowRange, volHighRange);
+				PlayClipAtPoint (deathSound, gameObject.transform.position, vol, 1);
+				dead = true;
+			}
 			StartCoroutine (Despawn ());
 		}
 	}
 
 	private void applyDamage(int damage){
+		float vol = Random.Range (volLowRange, volHighRange);
+		PlayClipAtPoint (hurtSound, gameObject.transform.position, vol, 1);
 		health -= damage;
 	}
 
@@ -54,7 +61,19 @@ public class EnemyHealth : MonoBehaviour {
 		yield return new WaitForSeconds (deathLength);
 		Destroy (this.gameObject);
 	}
-	IEnumerator DeathSound(){
+
+	GameObject PlayClipAtPoint(AudioClip clip, Vector3 position, float volume, float pitch){
+		GameObject obj = new GameObject();
+		obj.transform.position = position;
+		obj.AddComponent<AudioSource>();
+		obj.GetComponent<AudioSource> ().outputAudioMixerGroup = mixer;
+		obj.GetComponent<AudioSource> ().pitch = pitch;
+		obj.GetComponent<AudioSource>().PlayOneShot(clip, volume);
+		Destroy (obj, clip.length / pitch);
+		return obj;
+	}
+
+	/*IEnumerator DeathSound(){
 		while (true) {
 			if (dead) {
 				source.pitch = 1;
@@ -64,5 +83,5 @@ public class EnemyHealth : MonoBehaviour {
 			} else
 				yield return null;
 		}
-	}
+	}*/
 }

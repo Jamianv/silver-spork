@@ -4342,7 +4342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1245210995}
   m_Layer: 0
-  m_Name: Background10
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4842,6 +4842,11 @@ Prefab:
       propertyPath: landSound
       value: 
       objectReference: {fileID: 8300000, guid: b46e9e25e38c6e54dbb5f9fc76c8dd6a, type: 3}
+    - target: {fileID: 114534812319666408, guid: d8edfa5c161ea8040af55f070c1c2af3,
+        type: 2}
+      propertyPath: hurtSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 45825d431cb204a4f943c73d2c4da7e0, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d8edfa5c161ea8040af55f070c1c2af3, type: 2}
   m_IsPrefabParent: 0

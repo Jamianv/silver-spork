@@ -41,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1128225371682618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.27, y: 4.38, z: 0}
+  m_LocalPosition: {x: -2.62, y: 3.96, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -194,6 +194,11 @@ MonoBehaviour:
   health: 100
   slimePrefab: {fileID: 1864552201117572, guid: 94e8285c47bf95443a3f5ba1f56733cb,
     type: 2}
+  deathSound: {fileID: 8300000, guid: 96321bcca0c059344bdfe24d96dca29e, type: 3}
+  hurtSound: {fileID: 8300000, guid: 08c8161a74f711e4191680f7761b7d5b, type: 3}
+  mixer: {fileID: 243103325499063950, guid: 84b4c72e649fe854fb313654454f95ef, type: 2}
+  volLowRange: 0.01
+  volHighRange: 0.1
 --- !u!114 &114650391761206622
 MonoBehaviour:
   m_ObjectHideFlags: 1

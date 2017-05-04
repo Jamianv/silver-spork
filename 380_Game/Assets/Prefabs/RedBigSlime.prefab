@@ -285,6 +285,11 @@ MonoBehaviour:
   health: 100
   slimePrefab: {fileID: 1987105153614626, guid: ed53d83ddc659334a9e29a4bfeedd23a,
     type: 2}
+  deathSound: {fileID: 8300000, guid: 96321bcca0c059344bdfe24d96dca29e, type: 3}
+  hurtSound: {fileID: 8300000, guid: 08c8161a74f711e4191680f7761b7d5b, type: 3}
+  mixer: {fileID: 243103325499063950, guid: 84b4c72e649fe854fb313654454f95ef, type: 2}
+  volLowRange: 0.01
+  volHighRange: 0.1
 --- !u!212 &212002727596817152
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -84,9 +84,12 @@ public class Shooting : MonoBehaviour {
 				if(manaCost <= maxManaCost)
 					manaCost += (chargeRate * Time.deltaTime);
 			}
-			if(speed > minSpeed)
+			if (speed > minSpeed) {
+				//Charge Shot
 				speed -= chargeRate * Time.deltaTime * 0.5f;
-
+				//Arrowshot
+				//speed += chargeRate * Time.deltaTime * 0.5f;
+			}
 			Debug.Log ("speed: " + speed);
 		}
 		if (Input.GetMouseButtonUp (0)) {

@@ -7,10 +7,20 @@ public class BulletScript : MonoBehaviour {
 	[SerializeField]
 	private int damage = 10;
 	private GameObject player;
-	// Use this for initialization
+
+	//Sound
+
+	public AudioClip impactSound;
+	private AudioSource source;
+
+	[SerializeField]
+	private float volLowRange = .01f;
+	[SerializeField]
+	private float volHighRange = .1f;
+
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
-
+		source = GetComponent<AudioSource> ();
 	}
 
 	void OnBecameInvisible(){
@@ -21,7 +31,9 @@ public class BulletScript : MonoBehaviour {
 			Physics2D.IgnoreCollision (player.GetComponent<Collider2D>(), GetComponent<Collider2D> ());
 		}
 		if (collision.gameObject.tag == "Floor") {
-			Destroy (this.gameObject);
+			float vol = Random.Range (volLowRange, volHighRange);
+			source.PlayOneShot (impactSound, vol);
+			Destroy (this.gameObject, impactSound.length);
 		}
 		if (collision.gameObject.tag == "Wall") {
 			Destroy (this.gameObject);
