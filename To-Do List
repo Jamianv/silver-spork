@@ -1,7 +1,7 @@
 -Build a level  
 -Wand or weapon animations  
--Explosion animations
--Fix Bullet Collisions  
+-Fix Bullet Collisions
+-Find and fix any remaining odd collisions
 -Checkpoints
 -Destructible spawners  
 -Menu  
