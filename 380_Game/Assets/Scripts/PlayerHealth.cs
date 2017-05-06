@@ -10,6 +10,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour {
 
+	public LevelManager levelManager;
+
 	[SerializeField]
 	private Stat health;
 	[SerializeField]
@@ -25,6 +27,8 @@ public class PlayerHealth : MonoBehaviour {
 	[SerializeField]
 	private float volHighRange = .1f;
 
+	private bool dead = false;
+
 	public Stat Health {
 		get {
 			return health;
@@ -32,6 +36,7 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	private void Awake(){
+		levelManager = FindObjectOfType<LevelManager> ();
 		health.Initialize ();
 		animator = GetComponent<Animator> ();
 		source = GetComponent<AudioSource> ();
@@ -39,10 +44,21 @@ public class PlayerHealth : MonoBehaviour {
 
 	void Update(){
 		if (health.CurrentVal <= 0) {
-			death ();
+			if (!dead) {
+				death ();
+				dead = true;
+			}
 		}
 		if (gameObject.transform.position.y < -10) {
 			death ();
+			if (!dead) {
+				death ();
+				dead = true;
+			}
+		}
+		if (dead) {
+			health.CurrentVal = health.MaxVal;
+			dead = false;
 		}
 
 	}
@@ -59,11 +75,12 @@ public class PlayerHealth : MonoBehaviour {
 
 	IEnumerator HurtAnim(){
 		animator.SetBool ("hurt", true);
-		yield return new WaitForSeconds (1.5f);
+		yield return new WaitForSeconds (.167f);
 		animator.SetBool ("hurt", false);
 	}
 	void death(){
-		SceneManager.LoadScene (deathScene);
+		levelManager.RespawnPlayer ();
+		//SceneManager.LoadScene (deathScene);
 	}
 
 }

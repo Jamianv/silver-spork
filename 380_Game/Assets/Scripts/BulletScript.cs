@@ -34,27 +34,32 @@ public class BulletScript : MonoBehaviour {
 			Physics2D.IgnoreCollision (player.GetComponent<Collider2D>(), GetComponent<Collider2D> ());
 		}
 		if (collision.gameObject.tag == "Floor") {
-			float vol = Random.Range (volLowRange, volHighRange);
-			source.PlayOneShot (impactSound, vol);
-			Destroy (this.gameObject, impactSound.length);
+			Explode ();
+			Destroy (this.gameObject, 0.5f);
 		}
 		if (collision.gameObject.tag == "Wall") {
-			Destroy (this.gameObject);
+			Explode ();
+			Destroy (this.gameObject, 0.5f);
 		}
 		if (collision.gameObject.tag == "Enemy") {
-			animator.SetBool ("explode", true);
-			Destroy (this.gameObject);
+			Explode ();
+			Destroy (this.gameObject, 0.5f);
 			collision.gameObject.SendMessage ("applyDamage", damage);
 		}
 		if (collision.gameObject.tag == "Slime") {
-			Destroy (this.gameObject);
+			Explode ();
+			Destroy (this.gameObject, 0.5f);
 			collision.gameObject.SendMessage ("applyDamage", damage);
 		}
-		if (collision.gameObject.tag == "EnemyBullet")
-			Destroy (this.gameObject);
 	}
 
 	private void damageAmount(int damage){
 		this.damage = damage;
+	}
+
+	private void Explode(){
+		animator.SetBool ("explode", true);
+		float vol = Random.Range (volLowRange, volHighRange);
+		source.PlayOneShot (impactSound, vol);
 	}
 }
