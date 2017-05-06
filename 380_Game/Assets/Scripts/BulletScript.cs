@@ -51,6 +51,11 @@ public class BulletScript : MonoBehaviour {
 			Destroy (this.gameObject, 0.5f);
 			collision.gameObject.SendMessage ("applyDamage", damage);
 		}
+		if (collision.gameObject.tag == "HitBox") {
+			Explode ();
+			Destroy (this.gameObject, 0.5f);
+			collision.gameObject.SendMessage ("applyDamage", damage);
+		}
 	}
 
 	private void damageAmount(int damage){
