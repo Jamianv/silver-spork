@@ -15,6 +15,7 @@ TagManager:
   - EnemyBullet
   - Sword
   - Mana
+  - HitBox
   layers:
   - Default
   - TransparentFX

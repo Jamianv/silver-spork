@@ -3,29 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
+
+
 	[SerializeField]
 	private GameObject enemyPrefab;
 
 	private GameObject player;
 	private bool playerInTerritory;
 
-	private BoxCollider2D spawnTerritory;
 
-	//Spawn when player is within area
-	void Awake(){
-		//spawnTerritory = GetComponent<BoxCollider2D> ();
-	}
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerInTerritory = false;
-		//InvokeRepeating ("Spawn", 2f, 10);
 		StartCoroutine(Spawn());
+
 	}
 
 	void FixedUpdate(){
 
 	}
+
+	void Update(){
+		
+	}
+
 	void OnTriggerStay2D(Collider2D other){
 		if (other.gameObject == player) {
 			playerInTerritory = true;
@@ -40,11 +42,8 @@ public class EnemySpawner : MonoBehaviour {
 		}
 	}
 
-	/*void Spawn(){
-		Instantiate (enemyPrefab, transform.position, Quaternion.identity);
-	}
 
-	/**/
+
 	IEnumerator Spawn(){
 		while (true) {
 			if (playerInTerritory == true) {
