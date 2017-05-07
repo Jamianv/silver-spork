@@ -16,7 +16,7 @@ public class PoisonMushroomScript : MonoBehaviour {
 		}
 	}
 	IEnumerator Hurt(){
-		player.gameObject.SendMessage ("applyDamage", 5);
+		//player.gameObject.SendMessage ("applyDamage", 5);
 		player.gameObject.SendMessage ("KnockBack",10);
 		yield return new WaitForSeconds (1f);
 	}

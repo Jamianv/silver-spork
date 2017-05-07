@@ -19,18 +19,21 @@ public class KnightAttack : MonoBehaviour {
 	[SerializeField]
 	private float volHighRange = .1f;
 
+	private Animator animator;
+
 
 	void Awake(){
 		//sword = GetComponent<BoxCollider2D> ();
-
+		animator = GetComponentInParent<Animator>();
 		sword.enabled = false;
-		source = GetComponent<AudioSource> ();
+		source = GetComponentInParent<AudioSource> ();
 	}
 
 	// Use this for initialization
 	void Start () {
 		attackTimer = attackRate;
 		player = GameObject.FindGameObjectWithTag ("Player");
+		animator.SetBool ("attack", false);
 	}
 	
 	// Update is called once per frame
@@ -48,6 +51,7 @@ public class KnightAttack : MonoBehaviour {
 		//if player is in range activate sword collider, if player is in
 		//sword collider damage player at intervals
 		if (other.gameObject.tag == "Player") {
+			
 			sword.enabled = true;
 			if (sword.IsTouching (other))
 				Attack ();
@@ -57,6 +61,7 @@ public class KnightAttack : MonoBehaviour {
 	}
 	//apply damage at regular intervals
 	private void Attack(){
+		animator.SetBool ("attack", true);
 		attackTimer -= Time.deltaTime;
 		if (attackTimer <= 0) {
 			source.pitch = 1;
@@ -65,9 +70,12 @@ public class KnightAttack : MonoBehaviour {
 			attackTimer = attackRate;
 		}
 	}
-	//if player leaves reange disable sword collider
+	//if player leaves range disable sword collider
 	void OnTriggerExit2D(Collider2D other){
-		sword.enabled = false;
+		if (other.gameObject.tag == "Player") {
+			sword.enabled = false;
+			animator.SetBool ("attack", false);
+		}
 	}
 
 

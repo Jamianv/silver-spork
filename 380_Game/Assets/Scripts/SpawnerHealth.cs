@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnerHealth : MonoBehaviour {
-	[SerializeField]
-	private int health;
 
-	void Start () {
-		health = 100;
-	}
-	
-	// Update is called once per frame
+	[SerializeField]
+	private GameObject explosionPrefab;
+	private GameObject explosion;
+	[SerializeField]
+	private int health = 100;
+
 	void Update () {
 		if (health <= 0) {
-			//Instantiate(explosion)
+			explosion = Instantiate (explosionPrefab, transform.position, Quaternion.identity);
 			//Instantiate (Destroyed Sprite)
 			Destroy(transform.parent.gameObject);
+			Destroy (explosion, 0.833f);
 		}
 	}
 	private void applyDamage(int damage){

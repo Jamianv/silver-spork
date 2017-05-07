@@ -96,7 +96,6 @@ public class Shooting : MonoBehaviour {
 		if (Input.GetMouseButtonUp (0)) {
 			isFire = true;
 			playerMana.gameObject.SendMessage ("decreaseMana", manaCost);
-			//mana.CurrentVal -= (int)manaCost;
 			manaCost = baseManaCost;
 		}
 
@@ -112,21 +111,18 @@ public class Shooting : MonoBehaviour {
 
 		//Instantiate bullet locally
 		if(isFire){
-
+			//play bullet sound
 			float vol = Random.Range (volLowRange, volHighRange);
 			source.PlayOneShot (shootSound, vol);
-
-			//worldMousePos.z = transform.position.z - Camera.main.transform.position.z;
-			Quaternion rotation = Quaternion.FromToRotation(Vector3.up, worldMousePos-transform.position);
-
+			//find bullet rotation
+			Quaternion rotation = Quaternion.FromToRotation(Vector3.up, direction);
+			//instantiate bullet with found rotation
 			GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position + (Vector3)(direction*distFromPlayer), rotation);
 			//add velocity to bullet
-
 			bullet.GetComponent<Rigidbody2D> ().velocity = direction * speed;
-			Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), this.gameObject.GetComponent<Collider2D>());
 			//change size depending on charge
 			bullet.transform.localScale *= chargeDamage*.3f;
-			//sed damage to enemy
+			//send damage to enemy
 			bullet.gameObject.SendMessage ("damageAmount", (int)chargeDamage);
 			//reset charge to zero
 			chargeDamage = baseDamage;
@@ -146,15 +142,12 @@ public class Shooting : MonoBehaviour {
 		isRegen = false;
 	}
 
-	private void GetMouseDirection ()
-	{
+	private void GetMouseDirection (){
 		//where the mouse is pointing
 		worldMousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-
 		//direction from player to mouse
 		direction = (Vector2)(worldMousePos - transform.position);
 		direction.Normalize ();
-
 	}
 
 

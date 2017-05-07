@@ -20,7 +20,7 @@ public class KnightEnemy : MonoBehaviour {
 	private Animator animator;
 
 	//health
-	private EnemyHealth enemyHealth;
+	private KnightHealth knightHealth;
 
 	private float dist;
 
@@ -38,7 +38,7 @@ public class KnightEnemy : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D> ();
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 		animator = GetComponent<Animator> ();
-		enemyHealth = GetComponent<EnemyHealth> ();
+		knightHealth = GetComponentInChildren<KnightHealth> ();
 		source = GetComponent<AudioSource> ();
 	}
 
@@ -65,10 +65,8 @@ public class KnightEnemy : MonoBehaviour {
 		//distance from player
 		dist = Vector2.Distance (this.transform.position, player.transform.position);
 
-		animator.SetFloat ("attackDist", dist);
-
 		//stop moving if dead
-		if (enemyHealth.Health <= 0)
+		if (knightHealth.Health <= 0)
 			move.x = 0;
 
 		if (rb2d.velocity.magnitude < maxSpeed) {

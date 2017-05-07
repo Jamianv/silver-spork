@@ -9,9 +9,10 @@ public class BulletScript : MonoBehaviour {
 	private GameObject player;
 
 	//Sound
-
 	public AudioClip impactSound;
 	private AudioSource source;
+
+	private Rigidbody2D rb2d;
 
 	[SerializeField]
 	private float volLowRange = .01f;
@@ -24,36 +25,30 @@ public class BulletScript : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		source = GetComponent<AudioSource> ();
 		animator = GetComponent<Animator> ();
+		rb2d = GetComponent<Rigidbody2D> ();
 	}
 
 	void OnBecameInvisible(){
 		Destroy(this.gameObject);
 	}
-	void OnCollisionEnter2D(Collision2D collision){
-		if (collision.gameObject == player) {
-			Physics2D.IgnoreCollision (player.GetComponent<Collider2D>(), GetComponent<Collider2D> ());
-		}
+	void OnTriggerEnter2D(Collider2D collision){
+		
 		if (collision.gameObject.tag == "Floor") {
 			Explode ();
-			Destroy (this.gameObject, 0.5f);
 		}
 		if (collision.gameObject.tag == "Wall") {
 			Explode ();
-			Destroy (this.gameObject, 0.5f);
 		}
 		if (collision.gameObject.tag == "Enemy") {
 			Explode ();
-			Destroy (this.gameObject, 0.5f);
 			collision.gameObject.SendMessage ("applyDamage", damage);
 		}
 		if (collision.gameObject.tag == "Slime") {
 			Explode ();
-			Destroy (this.gameObject, 0.5f);
 			collision.gameObject.SendMessage ("applyDamage", damage);
 		}
 		if (collision.gameObject.tag == "HitBox") {
 			Explode ();
-			Destroy (this.gameObject, 0.5f);
 			collision.gameObject.SendMessage ("applyDamage", damage);
 		}
 	}
@@ -63,8 +58,10 @@ public class BulletScript : MonoBehaviour {
 	}
 
 	private void Explode(){
+		rb2d.velocity = Vector2.zero;
 		animator.SetBool ("explode", true);
 		float vol = Random.Range (volLowRange, volHighRange);
 		source.PlayOneShot (impactSound, vol);
+		Destroy (this.gameObject, 0.5f);
 	}
 }

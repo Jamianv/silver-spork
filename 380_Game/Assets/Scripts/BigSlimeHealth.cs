@@ -20,11 +20,6 @@ public class BigSlimeHealth : MonoBehaviour {
 	private float volHighRange = .1f;
 	private bool dead = false;
 
-	void Start () {
-		
-	}
-	
-
 	void Update () {
 		if (health <= 0) {
 			if (!dead) {

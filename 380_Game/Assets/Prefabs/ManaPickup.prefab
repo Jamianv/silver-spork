@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 50105850752747772}
   - component: {fileID: 61659937700544130}
   - component: {fileID: 114620188793454594}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ManaPickup
   m_TagString: Mana
   m_Icon: {fileID: 0}
