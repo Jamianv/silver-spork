@@ -12,24 +12,31 @@ public class FollowCam : MonoBehaviour {
 	private Vector3 moveTemp;
 	private Vector2 direction;
 
-	[SerializeField] float speed = 3;
+	[SerializeField] 
+	private float initialSpeed = 3f;
+	private float speed;
+	private bool dead;
 	[SerializeField] Vector2 minimumBoundary;
 	[SerializeField] Vector2 maximumBoundary;
 
-	[SerializeField] float movementThreshold = 3;
+	[SerializeField] float movementThreshold = .3f;
 
 	void Awake(){
 		player = GameObject.FindGameObjectWithTag ("Player");
-	}
 
+	}
+	void Start(){
+		speed = initialSpeed;
+	}
 	void FixedUpdate () {
+		player = GameObject.FindGameObjectWithTag ("Player");
 
 		if (player.transform.position.x > transform.position.x) {
-			direction = (Vector2)(player.transform.position - this.transform.position);
-		} else {
-			direction = (Vector2)(this.transform.position - player.transform.position);
+			direction.x = (player.transform.position.x - this.transform.position.x);
+		}if(player.transform.position.y > transform.position.y) {
+			direction.y = (this.transform.position.y - player.transform.position.y);
 		}
-	
+		direction.Normalize ();
 		if (direction.x >= movementThreshold || direction.y >= movementThreshold) {
 			moveTemp = player.transform.position;
 			moveTemp.z = -1;

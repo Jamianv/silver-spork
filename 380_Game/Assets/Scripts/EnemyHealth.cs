@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour {
 	private bool dead = false;
 
 	private Animator animator;
+	private Animator parentAnimator;
 
 	//Sound
 	public AudioClip deathSound;
@@ -32,15 +33,26 @@ public class EnemyHealth : MonoBehaviour {
 
 	private void Awake(){
 		animator = GetComponent<Animator> ();
+		parentAnimator = GetComponentInParent<Animator> ();
 		source = GetComponent<AudioSource> ();
 	}
 
 	private void Start(){
-		animator.SetInteger ("Health", health);
+		if (animator != null) {
+			animator.SetInteger ("Health", health);
+		}
+		if (parentAnimator != null) {
+			parentAnimator.SetInteger ("Health", health);
+		}
 	}
 		
 	void Update () {
-		animator.SetInteger ("Health", health);
+		if (animator != null) {
+			animator.SetInteger ("Health", health);
+		}
+		if (parentAnimator != null) {
+			parentAnimator.SetInteger ("Health", health);
+		}
 		if (health <= 0) {
 			if (!dead) {
 				float vol = Random.Range (volLowRange, volHighRange);
@@ -59,7 +71,10 @@ public class EnemyHealth : MonoBehaviour {
 
 	IEnumerator Despawn(){
 		yield return new WaitForSeconds (deathLength);
-		Destroy (this.gameObject);
+		Destroy (gameObject);
+		if (transform.parent.gameObject != null) {
+			Destroy (transform.parent.gameObject);
+		}
 	}
 
 	GameObject PlayClipAtPoint(AudioClip clip, Vector3 position, float volume, float pitch){

@@ -29,6 +29,8 @@ public class PlayerHealth : MonoBehaviour {
 
 	private bool dead = false;
 
+
+
 	public Stat Health {
 		get {
 			return health;
@@ -50,7 +52,7 @@ public class PlayerHealth : MonoBehaviour {
 			}
 		}
 		if (gameObject.transform.position.y < -10) {
-			death ();
+			//death ();
 			if (!dead) {
 				death ();
 				dead = true;
@@ -81,6 +83,11 @@ public class PlayerHealth : MonoBehaviour {
 	void death(){
 		levelManager.RespawnPlayer ();
 		//SceneManager.LoadScene (deathScene);
+	}
+
+	void OnTriggerEnter2D(Collider2D other){
+		if (other.gameObject.tag == "deathfloor")
+			death ();
 	}
 
 }

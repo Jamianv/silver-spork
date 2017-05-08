@@ -35,7 +35,11 @@ public class MediumSlimeHealth : MonoBehaviour {
 			for (int i = 0; i < 3; i++) {
 				Instantiate (slimePrefab, this.transform.position + new Vector3(i*.2f, 0, 0), Quaternion.identity);
 			}
-			Destroy (this.gameObject);
+			Destroy (gameObject);
+			if (transform.parent.gameObject != null) {
+				Destroy (transform.parent.gameObject);
+			}
+
 
 		}
 	}

@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour {
 
 	public GameObject currentCheckpoint;
 
+
 	private GameObject player;
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");

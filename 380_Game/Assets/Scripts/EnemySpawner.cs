@@ -6,7 +6,9 @@ public class EnemySpawner : MonoBehaviour {
 
 
 	[SerializeField]
-	private GameObject enemyPrefab;
+	private GameObject[] enemyPrefab;
+	//[SerializeField]
+	//private int enemies;
 
 	private GameObject player;
 	private bool playerInTerritory;
@@ -15,6 +17,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
+		//enemyPrefab = new GameObject[enemies];
 		playerInTerritory = false;
 		StartCoroutine(Spawn());
 
@@ -48,7 +51,8 @@ public class EnemySpawner : MonoBehaviour {
 		while (true) {
 			if (playerInTerritory == true) {
 				yield return new WaitForSeconds (5f);
-				Instantiate (enemyPrefab, transform.position, Quaternion.identity);
+				int enemy = Random.Range (0, enemyPrefab.Length);
+				Instantiate (enemyPrefab[enemy], transform.position, Quaternion.identity);
 
 			}
 			if (playerInTerritory == false) {
