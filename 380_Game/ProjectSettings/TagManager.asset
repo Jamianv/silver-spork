@@ -16,6 +16,7 @@ TagManager:
   - Sword
   - Mana
   - HitBox
+  - Timer
   layers:
   - Default
   - TransparentFX
