@@ -20,8 +20,10 @@ public class MediumSlimeHealth : MonoBehaviour {
 	private float volHighRange = .1f;
 	private bool dead = false;
 
-	void Start () {
+	private Transform parent;
 
+	void Start () {
+		parent = GetComponentInParent<Transform>();
 	}
 
 	// Update is called once per frame
@@ -36,7 +38,7 @@ public class MediumSlimeHealth : MonoBehaviour {
 				Instantiate (slimePrefab, this.transform.position + new Vector3(i*.2f, 0, 0), Quaternion.identity);
 			}
 			Destroy (gameObject);
-			if (transform.parent.gameObject != null) {
+			if (parent != null) {
 				Destroy (transform.parent.gameObject);
 			}
 

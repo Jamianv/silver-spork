@@ -20,6 +20,12 @@ public class BigSlimeHealth : MonoBehaviour {
 	private float volHighRange = .1f;
 	private bool dead = false;
 
+	private Transform parent;
+
+	void Start(){
+		parent = GetComponentInParent<Transform>();
+	}
+
 	void Update () {
 		if (health <= 0) {
 			if (!dead) {
@@ -32,7 +38,7 @@ public class BigSlimeHealth : MonoBehaviour {
 				Instantiate (slimePrefab, this.transform.position + new Vector3(i*.2f, 0, 0), Quaternion.identity);
 			}
 			Destroy (gameObject);
-			if (transform.parent.gameObject != null) {
+			if (parent != null) {
 				Destroy (transform.parent.gameObject);
 			}
 

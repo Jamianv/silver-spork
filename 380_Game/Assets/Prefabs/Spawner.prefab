@@ -155,9 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab:
-  - {fileID: 1397860058286512, guid: 8d039c6b682e0034bb12c0c4ef92628f, type: 2}
-  - {fileID: 1987105153614626, guid: ed53d83ddc659334a9e29a4bfeedd23a, type: 2}
-  - {fileID: 1615792313101654, guid: 7326ede911b88544fb94191e4367af9d, type: 2}
+  - {fileID: 1424834852744340, guid: ab9d054879ecc254b838462efb4656a3, type: 2}
+  spawnWait: 5
 --- !u!212 &212665372095100232
 SpriteRenderer:
   m_ObjectHideFlags: 1

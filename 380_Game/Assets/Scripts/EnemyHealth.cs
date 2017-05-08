@@ -25,6 +25,8 @@ public class EnemyHealth : MonoBehaviour {
 	[SerializeField]
 	private float volHighRange = .1f;
 
+	private Rigidbody2D rb2dParent;
+	private Rigidbody2D rb2d;
 	public int Health {
 		get {
 			return health;
@@ -35,6 +37,8 @@ public class EnemyHealth : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		parentAnimator = GetComponentInParent<Animator> ();
 		source = GetComponent<AudioSource> ();
+		rb2dParent = GetComponentInParent<Rigidbody2D> ();
+		rb2d = GetComponent<Rigidbody2D> ();
 	}
 
 	private void Start(){
@@ -59,7 +63,7 @@ public class EnemyHealth : MonoBehaviour {
 				PlayClipAtPoint (deathSound, gameObject.transform.position, vol, 1);
 				dead = true;
 			}
-			StartCoroutine (Despawn ());
+			Despawn ();
 		}
 	}
 
@@ -69,11 +73,16 @@ public class EnemyHealth : MonoBehaviour {
 		health -= damage;
 	}
 
-	IEnumerator Despawn(){
-		yield return new WaitForSeconds (deathLength);
-		Destroy (gameObject);
-		if (transform.parent.gameObject != null) {
-			Destroy (transform.parent.gameObject);
+	private void Despawn(){
+		
+		if (rb2d != null) {
+			rb2d.velocity = Vector2.zero;
+			Destroy (gameObject, .833f);
+		}
+
+		if (rb2dParent != null) {
+			rb2dParent.velocity = Vector2.zero;
+			Destroy (rb2dParent.transform.gameObject,0.833f);
 		}
 	}
 
@@ -87,16 +96,4 @@ public class EnemyHealth : MonoBehaviour {
 		Destroy (obj, clip.length / pitch);
 		return obj;
 	}
-
-	/*IEnumerator DeathSound(){
-		while (true) {
-			if (dead) {
-				source.pitch = 1;
-				source.PlayOneShot (deathSound);
-				yield return new WaitForSeconds (2f);
-				dead = false;
-			} else
-				yield return null;
-		}
-	}*/
 }

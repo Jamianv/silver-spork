@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f559c01a8fce74c955c8ba559727a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 20
   deathLength: 1
   deathSound: {fileID: 8300000, guid: 96321bcca0c059344bdfe24d96dca29e, type: 3}
   hurtSound: {fileID: 8300000, guid: 08c8161a74f711e4191680f7761b7d5b, type: 3}

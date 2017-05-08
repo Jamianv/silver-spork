@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class FollowCam : MonoBehaviour {
 
-	private GameObject player;
+	public GameObject player;
 
 	private Vector3 moveTemp;
 	private Vector2 direction;
@@ -22,18 +22,18 @@ public class FollowCam : MonoBehaviour {
 	[SerializeField] float movementThreshold = .3f;
 
 	void Awake(){
-		player = GameObject.FindGameObjectWithTag ("Player");
+		//player = GameObject.FindGameObjectWithTag ("Player");
 
 	}
 	void Start(){
 		speed = initialSpeed;
 	}
-	void FixedUpdate () {
+	void Update () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 
-		if (player.transform.position.x > transform.position.x) {
+		if (player.transform.position.x > transform.position.x || player.transform.position.x > transform.position.x) {
 			direction.x = (player.transform.position.x - this.transform.position.x);
-		}if(player.transform.position.y > transform.position.y) {
+		}if(player.transform.position.y > transform.position.y || player.transform.position.y > transform.position.y) {
 			direction.y = (this.transform.position.y - player.transform.position.y);
 		}
 		direction.Normalize ();
@@ -44,8 +44,8 @@ public class FollowCam : MonoBehaviour {
 		}
 		transform.position = new Vector3
 			(
-				Mathf.Clamp (transform.position.x, minimumBoundary.x, maximumBoundary.x),
-				Mathf.Clamp (transform.position.y, minimumBoundary.y, maximumBoundary.y),
+				Mathf.Max (transform.position.x, minimumBoundary.x),
+				Mathf.Max (transform.position.y, minimumBoundary.y),
 				transform.position.z
 			);
 

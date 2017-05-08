@@ -5,7 +5,8 @@ using UnityEngine;
 public class PoisonMushroomScript : MonoBehaviour {
 
 	private GameObject player;
-
+	[SerializeField]
+	private float jumpForce = 15;
 	void Awake(){
 		player = GameObject.FindGameObjectWithTag ("Player");
 	}
@@ -17,7 +18,7 @@ public class PoisonMushroomScript : MonoBehaviour {
 	}
 	IEnumerator Hurt(){
 		//player.gameObject.SendMessage ("applyDamage", 5);
-		player.gameObject.SendMessage ("KnockBack",20);
+		player.gameObject.SendMessage ("KnockBack",jumpForce);
 		yield return new WaitForSeconds (1f);
 	}
 }

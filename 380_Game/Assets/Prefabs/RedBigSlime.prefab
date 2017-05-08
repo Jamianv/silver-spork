@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65bcb6ca6a4f31428c5606bce97e0f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 200
   slimePrefab: {fileID: 1708214043170498, guid: ed53d83ddc659334a9e29a4bfeedd23a,
     type: 2}
   deathSound: {fileID: 8300000, guid: 96321bcca0c059344bdfe24d96dca29e, type: 3}
