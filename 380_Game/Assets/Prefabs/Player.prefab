@@ -59,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1638325416401028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.99, y: 0.74, z: 0}
+  m_LocalPosition: {x: -2.78, y: 1.4, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4981509956215974}
@@ -240,14 +240,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1088738664321310, guid: 1b45a12609a10c24cb44f89951dbfe75,
     type: 2}
-  baseSpeed: 5
-  minSpeed: 2
-  manaRegenRate: 0.5
-  baseManaCost: 5
-  maxManaCost: 15
-  chargeRate: 10
-  baseDamage: 5
-  maxDamage: 15
+  baseSpeed: 7
+  minSpeed: 4
+  manaRegenRate: 1
+  baseManaCost: 2
+  maxManaCost: 50
+  chargeRate: 30
+  baseDamage: 10
+  maxDamage: 30
   distFromPlayer: 0
   shootSound: {fileID: 8300000, guid: 522f3fb89590ca54dbc48dac22d6356f, type: 3}
 --- !u!114 &114508181244511832
@@ -294,9 +294,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.65
-  gravityModifier: 2
+  gravityModifier: 3
   maxspeed: 5
-  jumpTakeOffSpeed: 7
+  jumpTakeOffSpeed: 15
   walkSound: {fileID: 8300000, guid: b86cdf52c7034c844b7ff90f7e6c4ba0, type: 3}
   jumpSound: {fileID: 8300000, guid: 495e841917ed42d40a41a98b21d003b8, type: 3}
   landSound: {fileID: 8300000, guid: b46e9e25e38c6e54dbb5f9fc76c8dd6a, type: 3}

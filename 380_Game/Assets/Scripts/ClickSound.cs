@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.Audio;
 
 
 
@@ -19,7 +20,7 @@ public class ClickSound : MonoBehaviour, ISelectHandler , IPointerEnterHandler
     public AudioClip clickSound;
     public AudioClip hlightSound;
 
-
+	public AudioMixerGroup mixer;
 
     private Button button { get { return GetComponent<Button>(); } }
 
@@ -49,6 +50,7 @@ public class ClickSound : MonoBehaviour, ISelectHandler , IPointerEnterHandler
     // When highlighted with mouse.
     public void OnPointerEnter(PointerEventData eventData)
     {
+		source.outputAudioMixerGroup = mixer;
         source.PlayOneShot(hlightSound);
         // Do something.
         Debug.Log("<color=red>Event:</color> Completed mouse highlight.");
@@ -56,6 +58,7 @@ public class ClickSound : MonoBehaviour, ISelectHandler , IPointerEnterHandler
     // When selected.
     public void OnSelect(BaseEventData eventData)
     {
+		source.outputAudioMixerGroup = mixer;
         source.PlayOneShot(clickSound);
         // Do something.
         Debug.Log("<color=red>Event:</color> Completed selection.");

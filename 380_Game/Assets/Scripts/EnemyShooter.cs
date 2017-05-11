@@ -52,8 +52,8 @@ public class EnemyShooter : MonoBehaviour {
 
 		float vol = Random.Range (volLowRange, volHighRange);
 		source.PlayOneShot (shootSound, vol);
-
-		GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position + (Vector3)(direction * bulletDistance), Quaternion.identity);
+		Quaternion rotation = Quaternion.FromToRotation(Vector3.up, -1*direction);
+		GameObject bullet = (GameObject)Instantiate (bulletPrefab, transform.position + (Vector3)(direction * bulletDistance), rotation);
 		//add velocity to bullet
 		bullet.GetComponent<Rigidbody2D> ().velocity = direction * speed;
 	}

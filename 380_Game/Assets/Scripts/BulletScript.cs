@@ -51,6 +51,10 @@ public class BulletScript : MonoBehaviour {
 			Explode ();
 			collision.gameObject.SendMessage ("applyDamage", damage);
 		}
+		if (collision.gameObject.tag == "Boss") {
+			Explode ();
+			collision.gameObject.SendMessage ("applyDamage", damage);
+		}
 	}
 
 	private void damageAmount(int damage){

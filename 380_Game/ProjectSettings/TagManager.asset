@@ -17,6 +17,7 @@ TagManager:
   - Mana
   - HitBox
   - Timer
+  - Boss
   layers:
   - Default
   - TransparentFX

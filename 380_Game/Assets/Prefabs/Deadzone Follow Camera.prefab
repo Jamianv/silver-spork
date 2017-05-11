@@ -68,7 +68,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 3.27
-  m_Depth: 0
+  m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PauseUI: {fileID: 0}
   LeaderboardUI: {fileID: 0}
+  OptionsUI: {fileID: 0}
   timerScript: {fileID: 0}
   txt: {fileID: 0}
 --- !u!124 &124027284984807212
