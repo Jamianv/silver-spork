@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject PauseUI;
     public GameObject LeaderboardUI;
+	public GameObject OptionsUI;
+
 
     private GameObject timerObject;
     public Timer timerScript;
@@ -22,6 +24,7 @@ public class PauseMenu : MonoBehaviour
     {
         PauseUI.SetActive(false);
         LeaderboardUI.SetActive(false);
+		OptionsUI.SetActive (false);
         timerObject = GameObject.FindGameObjectWithTag("Timer");
         timerScript = timerObject.GetComponent<Timer>();
 
@@ -66,7 +69,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        //SceneManager.LoadScene("mainmenu");
+		SceneManager.LoadScene ("MainMenu");
     }
 
     public void QuitGame()
@@ -76,7 +79,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Options()
     {
-        //toggle options canvas
+		PauseUI.SetActive (false);
+		OptionsUI.SetActive (true);
     }
 
     public void Leaderboard()
@@ -99,4 +103,9 @@ public class PauseMenu : MonoBehaviour
         LeaderboardUI.SetActive(false);
         PauseUI.SetActive(true);
     }
+	public void ReturnFromOptions()
+	{
+		OptionsUI.SetActive (false);
+		PauseUI.SetActive (true);
+	}
 }
